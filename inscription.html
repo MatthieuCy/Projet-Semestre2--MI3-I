@@ -3,34 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <section class="form-container">
-        <h2>Rejoignez la famille Pizza Nova</h2>
-        <form action="#" method="post">
-            <div class="form-group">
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom" required>
-            </div>
-            <div class="form-group">
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" required>
-            </div>
-            <div class="form-group">
-                <label for="tel">Téléphone :</label>
-                <input type="tel" id="tel" name="tel" placeholder="06XXXXXXXX">
-            </div>
-            <div class="form-group">
-                <label for="adresse">Adresse de livraison :</label>
-                <textarea id="adresse" name="adresse" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="infos">Infos complémentaires (Interphone, étage...) :</label>
-                <input type="text" id="infos" name="infos">
-            </div>
-            <button type="submit" class="btn-main">Créer mon compte</button>
-        </form>
-    </section>
+
+    <header>
+        <nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-container">
+           <h2>Rejoignez la famille Pizza Nova</h2>
+            
+           <form action="#" method="post">
+               <div class="form-group">
+                   <label for="nom">Nom :</label>
+                   <input type="text" id="nom" name="nom" required>
+               </div>
+               
+               <div class="form-group">
+                   <label for="prenom">Prénom :</label>
+                   <input type="text" id="prenom" name="prenom" required>
+               </div>
+
+               <div class="form-group">
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mdp">Mot de passe :</label>
+                    <input type="password" id="mdp" name="mdp" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mdp_confirm">Confirmez le mot de passe :</label>
+                    <input type="password" id="mdp_confirm" name="mdp_confirm" required>
+                </div>
+               
+               <div class="form-group">
+                   <label for="tel">Téléphone :</label>
+                   <input type="tel" id="tel" name="tel" placeholder="06XXXXXXXX">
+               </div>
+               
+               <div class="form-group">
+                   <label for="adresse">Adresse de livraison :</label>
+                   <textarea id="adresse" name="adresse" rows="3"></textarea>
+               </div>
+               
+               <div class="form-group">
+                   <label for="infos">Infos complémentaires (Interphone, étage...) :</label>
+                   <input type="text" id="infos" name="infos">
+              </div>
+               
+              <button type="submit" class="btn-main">Créer mon compte</button>
+          </form>
+       </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025-2026 Projet Creative-Yumland - Filière préING2</p>
+    </footer>
+        
 </body>
 </html>
