@@ -14,60 +14,69 @@
             <ul>
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="carte.html">La Carte</a></li>
+                <li><a href="identité.html">Qui sommes-nous</a></li>
                 <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
                 <li><a href="profil.html">Mon Profil</a></li>
-                <li><a href="index.html" class="logout">Déconnexion</a></li>
+                <li><a href="notation.html">Notation</li>
             </ul>
         </nav>
     </header>
 
     <main class="profile-container">
         <section class="profile-header">
-            <h2>Bienvenue !</h2>
-            <p>Gérez vos informations et consultez vos commandes récentes.</p>
+            <h2>Bienvenue sur votre espace, [Prénom] !</h2>
+            <p>Gérez vos informations et profitez de vos avantages fidélité.</p>
         </section>
 
         <div class="profile-grid">
             <aside class="profile-card">
-                <h3>Mes Informations</h3>
+                <h3>Mes Informations ✏️</h3>
                 <div class="info-item">
-                    <strong>Nom :</strong> <span>Dublanc</span>
+                    <strong>Nom :</strong> <span>[Nom]</span>
                 </div>
                 <div class="info-item">
-                    <strong>Email :</strong> <span>e-mdublanc@cy-tech.fr</span>
+                    <strong>Prénom :</strong> <span>[Prénom]</span>
                 </div>
                 <div class="info-item">
-                    <strong>Téléphone :</strong> <span>06 12 34 56 78</span>
+                    <strong>Email :</strong> <span>[Email]</span>
                 </div>
                 <div class="info-item">
-                    <strong>Adresse :</strong> <span>Avenue du Parc, Cergy</span>
+                    <strong>Téléphone :</strong> <span>[Téléphone]</span>
                 </div>
-                <button class="btn-secondary">Modifier mes infos</button>
+                <div class="info-item">
+                    <strong>Adresse :</strong> <span>[Adresse de livraison]</span>
+                </div>
+                <div class="info-item">
+                    <strong>Détails :</strong> <span>[Étage, Interphone, Code...]</span>
+                </div>
             </aside>
 
+            <section class="profile-card loyalty">
+                <h3>Points Fidélité 🏆</h3>
+                <div class="points-box">
+                    <strong>[XXX]</strong> points cumulés
+                </div>
+                <p><em>Vous avez droit à [Pourcentage]% de remise sur votre prochaine commande !</em></p>
+            </section>
+
             <section class="profile-card history">
-                <h3>Dernières Commandes</h3>
+                <h3>Anciennes Commandes</h3>
                 <table>
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Commande</th>
-                            <th>Prix</th>
+                            <th>Détails</th>
+                            <th>Total</th>
                             <th>Statut</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>12/02/2026</td>
-                            <td>1x Margherita, 1x Coca</td>
-                            <td>14.50€</td>
-                            <td class="status delivered">Livrée</td>
-                        </tr>
-                        <tr>
-                            <td>05/02/2026</td>
-                            <td>2x Regina</td>
-                            <td>22.00€</td>
-                            <td class="status delivered">Livrée</td>
+                            <td>[JJ/MM/AAAA]</td>
+                            <td>[Détail des produits]</td>
+                            <td>[Prix] €</td>
+                            <td class="status-delivered">Livrée</td>
                         </tr>
                     </tbody>
                 </table>
