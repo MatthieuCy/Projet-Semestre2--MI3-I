@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - Pizza Nova</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="profil.html">Mon Profil</a></li>
+                <li><a href="index.html" class="logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <section class="profile-header">
+            <h2>Bienvenue, [Prénom] !</h2>
+            <p>Gérez vos informations et consultez vos commandes récentes.</p>
+        </section>
+
+        <div class="profile-grid">
+            <aside class="profile-card">
+                <h3>Mes Informations</h3>
+                <div class="info-item">
+                    <strong>Nom :</strong> <span>Dublanc</span>
+                </div>
+                <div class="info-item">
+                    <strong>Email :</strong> <span>e-mdublanc@cy-tech.fr</span>
+                </div>
+                <div class="info-item">
+                    <strong>Téléphone :</strong> <span>06 12 34 56 78</span>
+                </div>
+                <div class="info-item">
+                    <strong>Adresse :</strong> <span>Avenue du Parc, Cergy</span>
+                </div>
+                <button class="btn-secondary">Modifier mes infos</button>
+            </aside>
+
+            <section class="profile-card history">
+                <h3>Dernières Commandes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Commande</th>
+                            <th>Prix</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12/02/2026</td>
+                            <td>1x Margherita, 1x Coca</td>
+                            <td>14.50€</td>
+                            <td class="status delivered">Livrée</td>
+                        </tr>
+                        <tr>
+                            <td>05/02/2026</td>
+                            <td>2x Regina</td>
+                            <td>22.00€</td>
+                            <td class="status delivered">Livrée</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025-2026 Projet Creative-Yumland - Filière préING2</p>
+    </footer>
+
+</body>
+</html>
