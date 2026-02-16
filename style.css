@@ -1,79 +1,223 @@
-/* --- Page Profil --- */
-.profile-container {
-    padding: 40px 10%;
+*  Variables de la Charte Graphique  */
+:root {
+    --primary-color: #E74C3C;    /* Rouge Tomate */
+    --secondary-color: #F39C12;  /* Jaune */
+    --bg-color: #FDFEFE;         /* Blanc cassé */
+    --text-color: #2C3E50;       /* Bleu nuit */
+    --gray-light: #ecf0f1;
+    --white: #ffffff;
+}
+
+/*  Reset & Base  */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/*  Navigation  */
+header {
+    background-color: var(--white);
+    padding: 1rem 5%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/*  Hero & Sections */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(rgba(231, 76, 60, 0.1), rgba(243, 156, 18, 0.1));
+}
+
+.container, main {
+    padding: 40px 5%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.profile-header {
-    text-align: left;
-    margin-bottom: 30px;
+/*  Grille de Pizzas (Accueil & Carte)  */
+.grid-pizzas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minma280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
 }
 
+.pizza-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.pizza-card:hover {
+    transform: translateY(-5px);
+}
+
+.pizza-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.price {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+/* Formulaires   */
+.form-container {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/*  Boutons  */
+.btn-main, .btn-add {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-main:hover {
+    background-color: #c0392b;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Page Profil  */
 .profile-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Colonne info plus étroite que l'historique */
+    grid-template-columns: 1fr 2fr;
     gap: 30px;
+    margin-top: 20px;
 }
 
 .profile-card {
-    background: white;
+    background: var(--white);
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.profile-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--gray-light);
-    padding-bottom: 10px;
-}
-
-.info-item {
-    margin-bottom: 15px;
-}
-
-.info-item strong {
-    color: var(--text-color);
-}
-
-/* Bouton secondaire (Jaune) */
-.btn-secondary {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+.edit-icon {
     cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
 }
 
-/* Tableau des commandes */
+/* Tableaux (Commandes / Admin)  */
 table {
     width: 100%;
     border-collapse: collapse;
+    background: var(--white);
 }
 
 th, td {
-    padding: 12px;
+    padding: 15px;
     text-align: left;
     border-bottom: 1px solid var(--gray-light);
 }
 
-.status.delivered {
-    color: #27ae60;
-    font-weight: bold;
+th {
+    background-color: var(--gray-light);
 }
 
-.logout {
-    color: var(--primary-color) !important;
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px;
+    background-color: var(--text-color);
+    color: var(--white);
+    margin-top: 50px;
 }
 
-/* Responsive Profil */
+/*  Responsive  */
 @media (max-width: 768px) {
     .profile-grid {
         grid-template-columns: 1fr;
+    }
+    nav ul {
+        display: none; 
     }
 }
