@@ -1,0 +1,79 @@
+/* --- Page Profil --- */
+.profile-container {
+    padding: 40px 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Colonne info plus étroite que l'historique */
+    gap: 30px;
+}
+
+.profile-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.profile-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--gray-light);
+    padding-bottom: 10px;
+}
+
+.info-item {
+    margin-bottom: 15px;
+}
+
+.info-item strong {
+    color: var(--text-color);
+}
+
+/* Bouton secondaire (Jaune) */
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Tableau des commandes */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.status.delivered {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.logout {
+    color: var(--primary-color) !important;
+}
+
+/* Responsive Profil */
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
