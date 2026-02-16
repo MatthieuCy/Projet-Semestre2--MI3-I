@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noter ma commande - Pizza Nova</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="profil.html">Mon Profil</a></li>
+                <li><a href="index.html" class="logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Votre avis nous intéresse !</h2>
+        <p>Merci d'avoir commandé chez Pizza Nova. Comment s'est passée votre expérience ?</p>
+
+        <form action="#" method="POST" class="rating-form">
+            
+            <fieldset>
+                <legend>Qualité des produits</legend>
+                <label for="food-rating">Note sur 5 :</label>
+                <select id="food-rating" name="food-rating" required>
+                    <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ - Très bon</option>
+                    <option value="3">⭐⭐⭐ - Moyen</option>
+                    <option value="2">⭐⭐ - Décevant</option>
+                    <option value="1">⭐ - Mauvais</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Qualité de la livraison</legend>
+                <label for="delivery-rating">Note sur 5 :</label>
+                <select id="delivery-rating" name="delivery-rating" required>
+                    <option value="5">⭐⭐⭐⭐⭐ - Rapide et pro</option>
+                    <option value="4">⭐⭐⭐⭐ - Très bien</option>
+                    <option value="3">⭐⭐⭐ - Correct</option>
+                    <option value="2">⭐⭐ - En retard</option>
+                    <option value="1">⭐ - Problème de livraison</option>
+                </select>
+            </fieldset>
+
+            <div class="form-group">
+                <label for="comment">Un petit mot pour nous aider à nous améliorer ?</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Votre message ici..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-main">Envoyer ma note</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025-2026 Projet Creative-Yumland - Filière préING2</p>
+    </footer>
+
+</body>
+</html>
