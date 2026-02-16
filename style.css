@@ -2,8 +2,8 @@
 :root {
     --primary-color: #E74C3C;    /* Rouge Tomate */
     --secondary-color: #F39C12;  /* Jaune */
-    --bg-color: #FDFEFE;         /* Blanc cassé */
-    --text-color: #2C3E50;       /* Bleu nuit */
+    --bg-color: #2C3E50;          /* Bleu nuit */
+    --text-color: #FDFEFE;         /* Blanc cassé */
     --gray-light: #ecf0f1;
     --white: #ffffff;
 }
@@ -77,7 +77,7 @@ nav ul li a:hover {
 /*  Grille de Pizzas (Accueil & Carte)  */
 .grid-pizzas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minma280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax280px, 1fr));
     gap: 30px;
     margin-top: 30px;
 }
