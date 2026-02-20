@@ -1,18 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livraison en cours - Pizza Nova</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
 
-<!-- DONNES FICTIVES POUR LE MOMENT EN ATTENTE DE LA PHASE 2 -->
+    <header>
+       <nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="identite.html">Qui sommes-nous</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="restaurateur.html">Cuisine</a></li>
+                <li><a href="livraison.html">Livreur</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main class="delivery-container">
-  
-    <h2>Livraison en cours #XX</h2>
-    
-    <section class="delivery-info">
-        <p><strong>Client :</strong> IB</p>
-        <p><strong>Adresse :</strong> 3 rue du prieure 95000 Cergy</p>
-        <p><strong>Code :</strong> XXXX | <strong>Étage :</strong> Xème</p>
-        <p><strong>Consignes :</strong> "Laissez devant la porte, merci !"</p>
-        
-        <a href="https://maps.google.com" class="btn-delivery-nav">Ouvrir l'itinéraire </a>
-    </section>
+    <main class="container-mobile">
+        <section class="entete-livraison">
+            <h2>Course n°XX </h2>
+        </section>
 
-    <button class="btn-validate-delivery">✅ MARQUER COMME LIVRÉE</button>
-</main>
+        <section class="infos-client-livraison">
+            <div class="carte-livraison">
+                <h3> Destination</h3>
+                <p><strong>Client :</strong> Mr X</p>
+                <p><strong>Adresse :</strong> 123 Rue de l'Université, 95000 Cergy</p>
+                <p><strong>Détails :</strong> Bâtiment X, Xème étage, Code 01234</p>
+            </div>
+
+            <a href="https://www.google.com/maps" target="_blank" class="btn-gps">
+                LANCER L'ITINÉRAIRE 
+            </a>
+            
+            <button class="btn-valider-livraison">
+                ✅ MARQUER COMME LIVRÉE
+            </button>
+        </section>
+    </main>
+
+    <footer class="footer-mobile">
+        <p>&copy; 2025-2026 Projet Pizza Nova - Ibrahim, Ikram & Matthieu</p>
+    </footer>
+
+</body>
+</html>
