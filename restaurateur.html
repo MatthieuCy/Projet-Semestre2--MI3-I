@@ -1,28 +1,71 @@
-<main class="cuisine">
-    <h2>Commandes en préparation </h2>
-    
-    <div class="grille-commandes">
-        
-        <article class="commande apreparer">
-            <h3>Commande n°XXX</h3>
-            
-            <ul>
-                <li>CHoix1</li>
-                <li>CHoix2</li>
-                <li>CHOIX3</li>
-            </ul>
-            
-            <p><strong>Statut :</strong> En cuisine</p>
-            
-            <button class="bouton-principal">Prête pour livraison </button>
-        </article>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Interface Cuisine - Pizza Nova</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
 
-        <article class="commande livraison">
-            <h3>Commande n°XXX</h3>
-            
-            <p><strong>Livreur :</strong> MR x</p>
-            <p><strong>Statut :</strong> En cours de livraison...</p>
-        </article>
+    <header>
+        <nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="identite.html">Qui sommes-nous</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="restaurateur.html">Cuisine</a></li>
+                <li><a href="livraison.html">Livreur</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cuisine container">
+        <h2>Commandes en préparation </h2>
         
-    </div>
-</main>
+        <div class="grille-commandes">
+            
+            <article class="commande apreparer">
+                <h3>Commande n°XXX</h3>
+                
+                <ul>
+                    <li>CHOIX 1</li>
+                    <li>CHOIX 2</li>
+                    <li>CHOIX 3</li>
+                </ul>
+                
+                <p><strong>Statut :</strong> En cuisine</p>
+                
+                <button class="bouton-principal">Prête pour livraison </button>
+            </article>
+
+            <article class="commande livraison">
+                <h3>Commande n°xxx</h3>
+                
+                <p><strong>Livreur :</strong> Ibrahim N.</p>
+                <p><strong>Statut :</strong> En cours de livraison...</p>
+                <p><small>Partie de la cuisine il y a 10 min</small></p>
+            </article>
+
+            <article class="commande apreparer">
+                <h3>Commande n°XXX</h3>
+                <ul>
+                    <li>CHOIX 1</li>
+                    <li>CHOIX 2</li>
+                </ul>
+                <p><strong>Statut :</strong> En attente</p>
+                <button class="bouton-principal">Commencer la préparation</button>
+            </article>
+            
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025-2026 Projet Pizza Nova - Ibrahim, Ikram & Matthieu</p>
+    </footer>
+
+</body>
+</html>
