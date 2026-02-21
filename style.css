@@ -97,4 +97,36 @@ nav ul li a:hover {
 
 .btn-gps {
     background-color: var(--secondary-color); /* Toujours Jaune */
-    color: #2C3E50; /* Texte bleu nuit sur fond jaune pour la
+    color: #2C3E50; 
+
+ /* Grille contenant les cartes pizzas */
+
+.grid-pizzas {
+    display: grid; /* met la mise en page en grille (lignes / colonnes) */
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* colonnes  s’adaptent auto à taille de l’écran ( tel/ordi)*/
+
+    gap: 30px; /* Espacement entre les cartes */
+    padding: 20px 0; /* Marge interne haut/bas */
+}
+
+.pizza-card {
+    background-color: var(--white); 
+    border-radius: 15px; /* Coins arrondis */
+    overflow: hidden; /* Coupe ce qui dépasse */
+    text-align: center;
+    box-shadow: var(--shadow); 
+    transition: transform 0.3s ease; /* Animation */
+}
+
+.pizza-card:hover {
+    transform: translateY(-10px); /* Soulèvement visuel quand on clique dessus */
+}
+
+/* Image */
+.pizza-img {
+    width: 100%; /* Pleine largeur */
+    height: 200px; 
+    object-fit: cover; /* Pas de déformation */
+}
