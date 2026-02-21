@@ -2,51 +2,123 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Carte - Pizza Nova</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+
     <header>
         <nav>
-    <div class="logo">🍕 Pizza Nova</div>
-    <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="carte.html">La Carte</a></li>
-        <li><a href="identite.html">Qui sommes-nous</a></li>
-        <li><a href="inscription.html">S'inscrire</a></li>
-        <li><a href="connexion.html">Connexion</a></li>
-        <li><a href="admin.html">Admin</a></li>
-        <li><a href="restaurateur.html">Cuisine</a></li>
-        <li><a href="livraison.html">Livreur</a></li>
-    </ul>
-</nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="identite.html">Qui sommes-nous</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="restaurateur.html">Cuisine</a></li>
+                <li><a href="livraison.html">Livreur</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <h2>Notre Carte Artisanal</h2>
-        
-        <aside class="filters">
-            <input type="text" placeholder="Filtrer par ingrédient...">
-            <select name="categorie">
-                <option value="tous">Toutes les catégories</option>
-                <option value="classique">Classiques</option>
-                <option value="vegetarien">Végétariennes</option>
-                <option value="epice">Saveurs Épicées</option>
-            </select>
-            <select name="allergenes">
-                <option value="">Sans allergènes</option>
-                <option value="gluten">Sans Gluten</option>
-                <option value="lactose">Sans Lactose</option>
-            </select>
-        </aside>
-
-        <section class="grid-pizzas">
+    <main class="container">
+        <section class="menu-header">
+            <h1>Notre Carte Artisanale</h1>
+            <p>L'excellence de la pizzeria façon CY Tech : Tradition & Innovation.</p>
         </section>
+
+        <section class="filters-bar">
+            <div class="filter-group">
+                <label for="ingredients">Catégorie :</label>
+                <select id="ingredients">
+                    <option value="tous">Toutes les pizzas</option>
+                    <option value="viande">Avec Viande</option>
+                    <option value="veggie">Végétariennes</option>
+                    <option value="premium">Spécialités CY</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="allergenes">Allergènes :</label>
+                <select id="allergenes">
+                    <option value="aucun">Sans préférence</option>
+                    <option value="gluten">Sans Gluten</option>
+                    <option value="lactose">Sans Lactose</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="grid-pizzas">
+            
+            <article class="pizza-card">
+                <img src="images/margherita.jpg" alt="Pizza Margherita" class="pizza-img">
+                <div class="pizza-info">
+                    <h3>La Margherita 1925</h3>
+                    <p>Sauce tomate bio, mozzarella fior di latte, basilic frais.</p>
+                    <span class="price">12.00€</span>
+                    <button class="btn-add">Ajouter au panier </button>
+                </div>
+            </article>
+
+            <article class="pizza-card">
+                <img src="images/4 fromages.jpg" alt="Pizza 4 fromages" class="pizza-img">
+                <div class="pizza-info">
+                    <h3>La 4 Fromages</h3>
+                    <p>Base crème, gorgonzola, chèvre, emmental, mozzarella.</p>
+                    <span class="price">12.00€</span>
+                    <button class="btn-add">Ajouter au panier </button>
+                </div>
+            </article>
+
+            <article class="pizza-card">
+                <img src="images/regina.jpg" alt="Pizza Regina" class="pizza-img">
+                <div class="pizza-info">
+                    <h3>La Regina</h3>
+                    <p>Sauce tomate, jambon, champignons de Paris frais, olives.</p>
+                    <span class="price">13.50€</span>
+                    <button class="btn-add">Ajouter au panier </button>
+                </div>
+            </article>
+
+            <article class="pizza-card">
+                <img src="images/calzone.jpg" alt="Pizza Calzone" class="pizza-img">
+                <div class="pizza-info">
+                    <h3>Le Calzone des Ingénieurs</h3>
+                    <p>Pizza soufflée, ricotta crémeuse, salami piquant, œuf bio. La préférée de nos étudiants.</p>
+                    <span class="price">15.50€</span>
+                    <button class="btn-add">Ajouter au panier </button>
+                </div>
+            </article>
+
+            <article class="pizza-card">
+                <img src="images/veggie_deluxe.jpg" alt="Pizza Veggie Deluxe" class="pizza-img">
+                <div class="pizza-info">
+                    <h3>La Veggie Deluxe </h3>
+                    <p>Légumes grillés au four, pesto de basilic maison, pignons de pin et burrata fraîche.</p>
+                    <span class="price">14.00€</span>
+                    <button class="btn-add">Ajouter au panier </button>
+                </div>
+            </article>
+
+            <article class="pizza-card">
+                <img src="images/pizza_étudiante.jpg" alt="Pizza de la crise" class="pizza-img">
+                <div class="pizza-info">
+                    <h3>La Pizza étudiante  </h3>
+                    <p>Cette pizza est La solution gourmande simple pour  des budgets serrés et des envies immédiates.</p>
+                    <span class="price">2.99€</span>
+                    <button class="btn-add">Ajouter au panier </button>
+                </div>
+            </article>
+
+        </div>
     </main>
 
-     <footer>
-        <p>&copy; 2025-2026 Projet Creative-Yumland - Filière préING2</p>
+    <footer>
+        <p>&copy; 2025-2026 Projet Creative-Yumland - Ibrahim, Ikram & Matthieu (préING2)</p>
     </footer>
-    
+
 </body>
 </html>
