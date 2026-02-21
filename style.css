@@ -128,5 +128,18 @@ nav ul li a:hover {
 .pizza-img {
     width: 100%; /* Pleine largeur */
     height: 200px; 
-    object-fit: cover; /* Pas de déformation */
+    object-fit: cover; /* pour  Pas  avroi de déformation */
+}
+
+.menu-section {
+    margin-top: 50px; /*  espace entre la fin des pizzas et le début des boissons */
+    border-top: 1px solid var(--white); /*  ligne de séparation  */
+    padding-top: 20px;
+}
+
+.menu-section h2 {
+    text-align: center; 
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
