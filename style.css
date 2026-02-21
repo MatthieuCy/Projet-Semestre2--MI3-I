@@ -341,11 +341,14 @@ nav ul li a:hover {
     background-color: var(--terracotta-clair); 
 }
 
-.btn-add { 
-    background: transparent; 
-    border: 2px solid var(--terracotta); c
-    olor: var(--terracotta); 
-    min-height: 45px; 
+.btn-add {  
+    background-color: var(--terracotta); 
+    color: white; 
+    padding: 12px; 
+    border-radius: var(--rayon); 
+    width: 100%; 
+    font-weight: bold;
+    cursor: pointer; 
 }
 
 .btn-add:hover { 
