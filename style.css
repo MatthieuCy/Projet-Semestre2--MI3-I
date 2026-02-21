@@ -98,7 +98,7 @@ nav ul li a:hover {
 .btn-gps {
     background-color: var(--secondary-color); /* Toujours Jaune */
     color: #2C3E50; 
-
+}
  /* Grille contenant les cartes pizzas */
 
 .grid-pizzas {
