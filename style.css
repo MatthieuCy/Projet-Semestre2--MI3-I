@@ -397,6 +397,58 @@ td { padding: 15px; border-bottom: 1px solid var(--creme-fonce); }
     cursor: pointer;
 }
 
+/* NOTATION */
+.rating-form {
+    background-color: var(--blanc);
+    padding: 30px;
+    border-radius: var(--rayon);
+    border: 3px solid var(--terracotta);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.rating-form fieldset {
+    border: none;
+    margin-bottom: 20px;
+}
+
+.rating-form legend {
+    font-weight: bold;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+}
+
+.rating-options {
+    display: flex;
+    gap: 8px;
+}
+
+.rating-options input {
+    display: none;
+}
+
+.rating-options label {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    background: var(--blanc-pur);
+    border: 1px solid var(--creme-fonce);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.rating-options input:checked + label {
+    background: var(--terracotta);
+    color: white;
+}
+
+.rating-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--creme-fonce);
+}
+
 /* FOOTER */
 footer {
   background-color: var(--brun);
