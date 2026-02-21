@@ -28,33 +28,31 @@
 
     <main class="container">
         <h2>Votre avis nous intéresse !</h2>
-        <p>Merci d'avoir commandé chez Pizza Nova. Comment s'est passée votre expérience ?</p>
+        <h3>Merci d'avoir commandé chez Pizza Nova. Comment s'est passée votre expérience ?</h3>
 
         <form action="#" method="POST" class="rating-form">
             
-            <fieldset>
-                <legend>Qualité des produits</legend>
-                <label for="food-rating">Note sur 5 :</label>
-                <select id="food-rating" name="food-rating" required>
-                    <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
-                    <option value="4">⭐⭐⭐⭐ - Très bon</option>
-                    <option value="3">⭐⭐⭐ - Moyen</option>
-                    <option value="2">⭐⭐ - Décevant</option>
-                    <option value="1">⭐ - Mauvais</option>
-                </select>
-            </fieldset>
-
-            <fieldset>
-                <legend>Qualité de la livraison</legend>
-                <label for="delivery-rating">Note sur 5 :</label>
-                <select id="delivery-rating" name="delivery-rating" required>
-                    <option value="5">⭐⭐⭐⭐⭐ - Rapide et pro</option>
-                    <option value="4">⭐⭐⭐⭐ - Très bien</option>
-                    <option value="3">⭐⭐⭐ - Correct</option>
-                    <option value="2">⭐⭐ - En retard</option>
-                    <option value="1">⭐ - Problème de livraison</option>
-                </select>
-            </fieldset>
+        <fieldset>
+              <legend>Qualité des produits</legend>
+              <div class="rating-options">
+                  <input type="radio" name="food" id="f5" value="5"><label for="f5">⭐ 5</label>
+                  <input type="radio" name="food" id="f4" value="4"><label for="f4">⭐ 4</label>
+                  <input type="radio" name="food" id="f3" value="3"><label for="f3">⭐ 3</label>
+                  <input type="radio" name="food" id="f2" value="2"><label for="f2">⭐ 2</label>
+                  <input type="radio" name="food" id="f1" value="1"><label for="f1">⭐ 1</label>
+              </div>
+         </fieldset>
+            
+         <fieldset>
+             <legend>Qualité de la livraison</legend>
+             <div class="rating-options">
+                 <input type="radio" name="delivery" id="d5" value="5"><label for="d5">⭐ 5</label>
+                 <input type="radio" name="delivery" id="d4" value="4"><label for="d4">⭐ 4</label>
+                 <input type="radio" name="delivery" id="d3" value="3"><label for="d3">⭐ 3</label>
+                 <input type="radio" name="delivery" id="d2" value="2"><label for="d2">⭐ 2</label>
+                 <input type="radio" name="delivery" id="d1" value="1"><label for="d1">⭐ 1</label>
+             </div>
+         </fieldset>
 
             <div class="form-group">
                 <label for="comment">Un petit mot pour nous aider à nous améliorer ?</label>
