@@ -10,61 +10,64 @@
 
     <header>
         <nav>
-    <div class="logo">🍕 Pizza Nova</div>
-    <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="carte.html">La Carte</a></li>
-        <li><a href="identite.html">Qui sommes-nous</a></li>
-        <li><a href="inscription.html">S'inscrire</a></li>
-        <li><a href="connexion.html">Connexion</a></li>
-        <li><a href="admin.html">Admin</a></li>
-        <li><a href="restaurateur.html">Cuisine</a></li>
-        <li><a href="livraison.html">Livreur</a></li>
-        <li><a href="notation.html">Nous Noter</a></li>
-    </ul>
-</nav>
+            <div class="logo">🍕 Pizza Nova</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="carte.html">La Carte</a></li>
+                <li><a href="identite.html">Qui sommes-nous</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="restaurateur.html">Cuisine</a></li>
+                <li><a href="livraison.html">Livreur</a></li>
+                <li><a href="notation.html">Nous Noter</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="hero">
-        <h1>L'excellence de la pizzerria façon CY</h1>
-        <p>Quelle pizza vous ferait plaisir aujourd'hui ?</p>
-        <div class="search-container">
-            <input type="text" placeholder="Rechercher une pizza (ex: Margherita, Royale...)" id="searchBar">
-            <button class="btn-main">Chercher</button>
+    <section class="hero" style="padding: 60px 20px; text-align: center;">
+        <h1>L'excellence de la pizzeria façon CY</h1>
+        <p>Une expérience artisanale unique, entre tradition italienne et modernité.</p>
+        <div class="search-container" style="margin-top: 20px;">
+            <a href="carte.html" class="btn-main">Consulter la carte complète</a>
         </div>
     </section>
 
-    <section class="featured">
-        <h2>Nos Best-Sellers</h2>
+    <section class="featured container-mobile">
+        <h2 style="text-align: center; margin-bottom: 30px;">Pourquoi choisir Pizza Nova ?</h2>
+        
         <div class="grid-pizzas">
-            <article class="pizza-card">
-                <img src="images/margherita.jpg" alt="pizza Margherita" class="pizza-img">
-                <h3>Margherita</h3>
-                <p>Sauce tomate bio, mozzarella fior di latte, basilic frais.</p>
-                <span class="price">12.00€</span>
-                <button class="btn-add">Ajouter au panier</button>
+            <article class="commande">
+                <h3 style="color: var(--secondary-color);">Savoir-faire Artisanal</h3>
+                <img src="images/savoir-faire.jpg" alt="Pétrissage de la pâte" class="pizza-img" style="margin-bottom: 15px;">
+                <p>Nos pizzaïolos travaillent une pâte pétrie chaque matin et laissée au repos 48h pour une légèreté incomparable.</p>
             </article>
 
-            <article class="pizza-card">
-                <img src="images/4 fromages.jpg"  alt="Pizza 4 fromages artisanale"  class="pizza-img">
-                <h3>4 fromages</h3>
-                <p>Base crème, gorgonzola, chèvre, emmental, mozzarella.</p>
-                <span class="price">12.00€</span>
-                <button class="btn-add">Ajouter au panier</button>
+            <article class="commande">
+                <h3 style="color: var(--secondary-color);">Ingrédients Premium</h3>
+                <img src="images/ingredients.jpg" alt="Ingrédients frais" class="pizza-img" style="margin-bottom: 15px;">
+                <p>De la mozzarella fior di latte aux tomates bio de saison, nous sélectionnons uniquement le meilleur pour vos papilles.</p>
             </article>
 
-            <article class="pizza-card">
-                <img src="images/regina.jpg"    alt="Pizza Regina artisanale"  class="pizza-img">
-                <h3>Regina</h3>
-                <p>Sauce tomate, jambon, champignons de Paris, olives.</p>
-                <span class="price">13.50€</span>
-                <button class="btn-add">Ajouter au panier</button>
+            <article class="commande">
+                <h3 style="color: var(--secondary-color);">Livraison Express</h3>
+                <img src="images/livraison.jpg" alt="Livreur de pizza" class="pizza-img" style="margin-bottom: 15px;">
+                <p>Commandez en quelques clics et recevez votre pizza fumante grâce à notre réseau de livreurs ultra-réactifs.</p>
             </article>
+        </div>
+    </section>
+
+    <section class="container-mobile" style="margin-top: 40px; text-align: center;">
+        <div class="carte-livraison">
+            <h3>Nos Horaires</h3>
+            <p>Lundi - Dimanche : 11h30 - 14h30 / 18h30 - 23h00</p>
+            <br>
+            <p>📍 <strong>Localisation :</strong> Campus CY, Cergy-Pontoise</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram & Matthieu</p>
+        <p>&copy; 2025-2026 Projet Pizza Nova - préING2 - Ibrahim, Ikram & Matthieu</p>
     </footer>
 
 </body>
