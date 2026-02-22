@@ -1,25 +1,24 @@
-/*  - CHARTE SABLE & TERRACOTTA */
+/* 
+   CHARTE SABLE & TERRACOTTA - VERSION FINALE HARMONISÉE
+    */
 
-/* VARIABLES */
 :root {
-  --bg-douceur: #EEDCC6;      /* Fond global */
-  --blanc: #F7E7D3;            /* Fond des cartes et sections */
-  --blanc-pur: #FCF5ED;        /* Pour les formulaires et zones de texte */
-  --creme-fonce: #D9C5B2;      
-  
-  --brun: #3D2B1F;             /* Texte principal */
-  --brun-mid: #5C4534;         /* Texte secondaire */
-  --terracotta: #A64B2A;       /* Boutons */
+  --bg-douceur: #EEDCC6;
+  --blanc: #F7E7D3;
+  --blanc-pur: #FCF5ED;
+  --creme-fonce: #D9C5B2;
+  --brun: #3D2B1F;
+  --brun-mid: #5C4534;
+  --terracotta: #A64B2A;
   --terracotta-clair: #C15C39;
-  --or: #C59D5F;               /* Logo et éléments de prestige */
-  
+  --or: #C59D5F;
   --police-titre: 'Playfair Display', Georgia, serif;
   --police-corps: 'Lato', Helvetica, sans-serif;
   --rayon: 12px;
   --shadow: 0 8px 24px rgba(61, 43, 31, 0.12);
 }
 
-/* RESET */
+/* RESET & BASE */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -34,198 +33,55 @@ body {
 }
 
 /* TYPOGRAPHIE */
-h1, h2, h3, h4 {
-     font-family: var(--police-titre); 
-     color: var(--brun); 
-}
-
-h1 { 
-    font-size: 48px; 
-    margin-bottom: 20px; 
-    text-align: center; 
-} 
-
-h2 { 
-    font-size: 32px; 
-    margin-bottom: 25px; 
-    text-align: center; 
-    font-style: italic; 
-    color: var(--terracotta); 
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 30px;
-}
+h1, h2, h3, h4 { font-family: var(--police-titre); color: var(--brun); }
+h1 { font-size: 48px; margin-bottom: 20px; text-align: center; } 
+h2 { font-size: 32px; margin-bottom: 25px; text-align: center; font-style: italic; color: var(--terracotta); }
 
 /* NAVIGATION */
 header {
   background-color: var(--brun);
   padding: 0 5%;
-  position: sticky; 
-  top: 0;
-  z-index: 1000;
+  position: sticky; top: 0; z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   border-bottom: 2px solid var(--or);
 }
 
 nav {
-  display: flex; 
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 80px; max-width: 1200px; margin: 0 auto;
 }
 
-.logo { 
-    font-family: var(--police-titre); 
-    font-size: 26px; 
-    font-weight: bold; 
-    color: var(--or); 
-}
+.logo { font-family: var(--police-titre); font-size: 26px; font-weight: bold; color: var(--or); }
 
-nav ul { 
-    display: flex; 
-    list-style: none; 
-    gap: 5px; 
-}
+nav ul { display: flex; list-style: none; gap: 5px; }
 
 nav ul li a {
-  color: var(--blanc);
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 10px 12px;
-  transition: 0.3s;
-  text-decoration: none;
+  color: var(--blanc); font-size: 11px; font-weight: bold; text-transform: uppercase;
+  padding: 10px 12px; transition: 0.3s; text-decoration: none;
 }
 
-nav ul li a:hover { 
-    color: var(--or); 
-    background: rgba(197, 157, 95, 0.1); 
-    border-radius: var(--rayon); 
-}
+nav ul li a:hover { color: var(--or); background: rgba(197, 157, 95, 0.1); border-radius: var(--rayon); }
 
-/* SECTION HERO (Page Accueil) */
-.hero {
-    padding: 60px 20px;
-    background: var(--blanc-pur);
-    border-bottom: 1px solid var(--creme-fonce);
-}
-
-.hero-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.hero-image img {
-    max-width: 350px;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    border: 5px solid white;
-}
-
-.hero-content {
-    max-width: 600px;
-}
-
-.hero-content h1 {
-    text-align: left; /* Aligné avec l'image */
-    color: var(--terracotta);
-}
+/* SECTION HERO & RECHERCHE */
+.hero { padding: 60px 20px; background: var(--blanc-pur); border-bottom: 1px solid var(--creme-fonce); }
+.hero-container { display: flex; align-items: center; justify-content: center; gap: 50px; max-width: 1200px; margin: 0 auto; }
+.hero-image img { max-width: 350px; border-radius: 20px; box-shadow: var(--shadow); border: 5px solid white; }
+.hero-content { max-width: 600px; }
+.hero-content h1 { text-align: left; color: var(--terracotta); }
 
 .search-box {
-    margin-top: 30px;
-    padding: 20px;
-    background: var(--blanc);
-    border-radius: var(--rayon);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border: 1px solid var(--creme-fonce);
+  margin-top: 30px; padding: 20px; background: var(--blanc); border-radius: var(--rayon);
+  display: flex; align-items: center; gap: 15px; border: 1px solid var(--creme-fonce);
 }
 
-.search-input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--creme-fonce);
-}
+.search-input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--creme-fonce); outline: none; }
 
-.btn-ok {
-    background-color: var(--terracotta);
-    color: white;
-    padding: 10px 25px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-ok:hover {
-    background-color: var(--terracotta-clair);
-}
-
-/* GRILLES ET CARTES */
-.container, .container-mobile, .profile-container { 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 40px 20px; 
-}
-
-.grid-pizzas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Force une seule ligne */
-  gap: 30px;
-  align-items: stretch;
-}
-
-.pizza-card, .commande, .profile-card, .carte-livraison {
-  background: var(--blanc);
-  border-radius: var(--rayon);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
-  border-top: 5px solid var(--or);
-  padding: 20px;
-  text-align: center;
-}
-
-.pizza-card:hover { 
-    transform: translateY(-8px); 
-}
-
-.highlight-title {
-    color: var(--terracotta);
-    margin-bottom: 15px;
-    font-size: 22px;
-}
-
-.pizza-img { 
-    width: 100%; 
-    height: 250px; /* Taille augmentée comme demandé */
-    object-fit: cover; 
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-/* SECTIONS INFOS PRATIQUES */
-.info-section {
-    margin-top: 40px;
-    text-align: center;
-}
-
-/* BOUTONS */
-.btn-main, .btn-add, .btn-gps, .btn-valider-livraison, .bouton-principal {
+/* BOUTONS GENERAUX  */
+.btn-main, .btn-ok {
   background-color: var(--terracotta);
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 25px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
@@ -233,25 +89,108 @@ nav ul li a:hover {
   transition: 0.3s;
   text-decoration: none;
   display: inline-block;
-  min-height: 45px; 
   text-align: center;
+}
+
+.btn-main:hover, .btn-ok:hover {
+  background-color: var(--terracotta-clair);
+  transform: translateY(-2px);
+}
+
+/* FORMULAIRES (Inscription / Connexion) */
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 40px;
+    background: var(--blanc-pur);
+    border-radius: var(--rayon);
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--terracotta);
+}
+
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--brun-mid); }
+.form-group input { width: 100%; padding: 12px; border: 1px solid var(--creme-fonce); border-radius: 8px; background: white; outline: none; }
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--terracotta);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+/* QUI SOMMES NOUS */
+.identite-container { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; padding: 40px 0; }
+.identite-image { flex: 1; min-width: 300px; position: relative; }
+.identite-image img { width: 100%; border-radius: var(--rayon); box-shadow: 20px 20px 0px var(--or); transition: 0.4s; }
+.identite-image img:hover { transform: translate(5px, 5px); box-shadow: 10px 10px 0px var(--or); }
+.identite-texte { flex: 1.5; min-width: 300px; text-align: left; }
+
+/* GRILLES ET CARTES */
+.container, .container-mobile { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+.grid-pizzas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: stretch; }
+
+.pizza-card, .commande {
+  background: var(--blanc); border-radius: var(--rayon); overflow: hidden;
+  box-shadow: var(--shadow); transition: transform 0.3s ease;
+  border-top: 5px solid var(--or); padding: 20px; text-align: center;
+}
+
+.pizza-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+
+/* INTERFACE CUISINE & LIVREUR */
+.btn-preparer {
+    background: linear-gradient(135deg, #A64B2A 0%, #3D2B1F 100%);
+    color: #F7E7D3;
+    border: 1px solid var(--or);
+    padding: 12px 20px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-livre {
+    background-color: #27ae60;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background: var(--creme-fonce);
+    color: var(--brun);
 }
 
 /* FOOTER */
 footer {
-  background-color: var(--brun);
-  color: var(--or);
-  text-align: center;
-  padding: 40px;
-  margin-top: 60px;
-  border-top: 3px solid var(--or);
+  background-color: var(--brun); color: var(--or); text-align: center;
+  padding: 40px; margin-top: 60px; border-top: 3px solid var(--or);
 }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
     .grid-pizzas { grid-template-columns: 1fr; }
-    .hero-container { flex-direction: column; text-align: center; }
-    .hero-content h1 { text-align: center; }
-    .search-box { flex-direction: column; }
-    nav ul { display: none; }  
+    .hero-container, .identite-container { flex-direction: column; text-align: center; }
 }
