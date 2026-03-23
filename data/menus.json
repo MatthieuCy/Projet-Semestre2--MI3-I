@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nom": "Menu Étudiant",
+    "description": "L'essentiel pour bien manger sans se ruiner ! Une pizza + une boisson.",
+    "plats_ids": [6, 9],
+    "prix_total": 3.50,
+    "personnes_min": 1,
+    "creneaux": "tous",
+    "image": "images/pizza_etudiante.jpg"
+  },
+  {
+    "id": 2,
+    "nom": "Menu Classique",
+    "description": "Une entrée + une pizza Margherita + un dessert + une boisson. Le parfait repas complet.",
+    "plats_ids": [17, 1, 13, 9],
+    "prix_total": 22.00,
+    "personnes_min": 1,
+    "creneaux": "tous",
+    "image": "images/margherita.jpg"
+  },
+  {
+    "id": 3,
+    "nom": "Menu Duo Nova",
+    "description": "Deux pizzas au choix + deux boissons + deux desserts. Idéal pour partager !",
+    "plats_ids": [1, 3, 9, 10, 13, 14],
+    "prix_total": 38.00,
+    "personnes_min": 2,
+    "creneaux": "tous",
+    "image": "images/regina.jpg"
+  },
+  {
+    "id": 4,
+    "nom": "Menu Midi Rapide",
+    "description": "Une pizza + une boisson au choix. Servi en 15 minutes chrono !",
+    "plats_ids": [1, 9],
+    "prix_total": 12.50,
+    "personnes_min": 1,
+    "creneaux": "midi",
+    "image": "images/margherita.jpg"
+  }
+]

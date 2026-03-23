@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "client_id": 1,
+    "articles": [
+      {"type": "plat", "id": 1, "quantite": 2, "nom": "La Margherita 1925", "prix_unitaire": 12.00},
+      {"type": "plat", "id": 9, "quantite": 2, "nom": "Coca-Cola Classic", "prix_unitaire": 1.50}
+    ],
+    "total": 27.00,
+    "adresse_livraison": "12 Rue des Fleurs, 95000 Cergy",
+    "details_livraison": "Bâtiment A, 2ème étage, Code 1234",
+    "telephone_client": "0612345678",
+    "type": "livraison",
+    "statut": "livree",
+    "livreur_id": 9,
+    "date_commande": "2025-03-10 12:35:00",
+    "date_livraison_souhaitee": "2025-03-10 13:00:00",
+    "date_livraison_effective": "2025-03-10 12:58:00",
+    "paiement_statut": "paye",
+    "note_produits": 5,
+    "note_livraison": 4,
+    "commentaire": "Très bonne pizza, livrée rapidement !"
+  },
+  {
+    "id": 2,
+    "client_id": 2,
+    "articles": [
+      {"type": "menu", "id": 2, "quantite": 1, "nom": "Menu Classique", "prix_unitaire": 22.00},
+      {"type": "plat", "id": 14, "quantite": 1, "nom": "Panna Cotta", "prix_unitaire": 4.50}
+    ],
+    "total": 26.50,
+    "adresse_livraison": "34 Avenue de l'Université, 95000 Cergy",
+    "details_livraison": "Résidence Les Érables, Boîte 7",
+    "telephone_client": "0623456789",
+    "type": "livraison",
+    "statut": "en_livraison",
+    "livreur_id": 9,
+    "date_commande": "2025-03-15 19:10:00",
+    "date_livraison_souhaitee": "2025-03-15 19:45:00",
+    "date_livraison_effective": null,
+    "paiement_statut": "paye",
+    "note_produits": null,
+    "note_livraison": null,
+    "commentaire": null
+  },
+  {
+    "id": 3,
+    "client_id": 3,
+    "articles": [
+      {"type": "plat", "id": 4, "quantite": 1, "nom": "Le Calzone des Ingénieurs", "prix_unitaire": 15.50},
+      {"type": "plat", "id": 5, "quantite": 1, "nom": "La Veggie Deluxe", "prix_unitaire": 14.00},
+      {"type": "plat", "id": 10, "quantite": 2, "nom": "Ice Tea Pêche", "prix_unitaire": 1.50}
+    ],
+    "total": 32.50,
+    "adresse_livraison": "5 Rue du Prieuré, 95000 Cergy",
+    "details_livraison": "Maison, sonnette gauche",
+    "telephone_client": "0634567890",
+    "type": "livraison",
+    "statut": "en_preparation",
+    "livreur_id": null,
+    "date_commande": "2025-03-15 19:20:00",
+    "date_livraison_souhaitee": "2025-03-15 20:00:00",
+    "date_livraison_effective": null,
+    "paiement_statut": "paye",
+    "note_produits": null,
+    "note_livraison": null,
+    "commentaire": null
+  },
+  {
+    "id": 4,
+    "client_id": 4,
+    "articles": [
+      {"type": "plat", "id": 3, "quantite": 1, "nom": "La Regina", "prix_unitaire": 13.50},
+      {"type": "plat", "id": 12, "quantite": 1, "nom": "Eau plate", "prix_unitaire": 1.00}
+    ],
+    "total": 14.50,
+    "adresse_livraison": "sur_place",
+    "details_livraison": "",
+    "telephone_client": "0645678901",
+    "type": "sur_place",
+    "statut": "en_attente",
+    "livreur_id": null,
+    "date_commande": "2025-03-15 19:30:00",
+    "date_livraison_souhaitee": null,
+    "date_livraison_effective": null,
+    "paiement_statut": "paye",
+    "note_produits": null,
+    "note_livraison": null,
+    "commentaire": null
+  },
+  {
+    "id": 5,
+    "client_id": 5,
+    "articles": [
+      {"type": "menu", "id": 3, "quantite": 1, "nom": "Menu Duo Nova", "prix_unitaire": 38.00}
+    ],
+    "total": 38.00,
+    "adresse_livraison": "9 Chemin des Vignes, 95300 Pontoise",
+    "details_livraison": "Villa, portail électrique code 9999",
+    "telephone_client": "0656789012",
+    "type": "livraison",
+    "statut": "livree",
+    "livreur_id": 9,
+    "date_commande": "2025-03-12 20:00:00",
+    "date_livraison_souhaitee": "2025-03-12 20:45:00",
+    "date_livraison_effective": "2025-03-12 20:40:00",
+    "paiement_statut": "paye",
+    "note_produits": 4,
+    "note_livraison": 5,
+    "commentaire": "Parfait, merci !"
+  }
+]
