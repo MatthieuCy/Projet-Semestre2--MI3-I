@@ -135,13 +135,15 @@ $points = $u['points_fidelite'];
                             </span>
                         </td>
                         <td>
-                            <?php if ($cmd['statut'] == 'livree' && $cmd['note_produits'] === null): ?>
-                                <a href="notation.php?commande_id=<?php echo $cmd['id']; ?>" class="btn-ok">Noter</a>
-                            <?php elseif ($cmd['note_produits'] !== null): ?>
-                                ⭐ <?php echo $cmd['note_produits']; ?>/5
-                            <?php else: ?>
-                                —
-                            <?php endif; ?>
+                            <?php 
+                            $note = isset($cmd['note_produits']) ? $cmd['note_produits'] : null;
+                            if ($cmd['statut'] == 'livree' && $note === null) {
+                                echo '<a href="notation.php?commande_id=' . $cmd['id'] . '" class="btn-ok">Noter</a>'; } 
+                             else if ($note !== null) {
+                                echo "⭐ " . $note . "/5"; } 
+                            else {
+                                echo "—"; }
+                            ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
