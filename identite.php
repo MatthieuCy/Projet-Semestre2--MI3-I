@@ -1,16 +1,16 @@
 <?php
-require_once '../includes/session.php';
+require_once(__DIR__ . '/includes/session.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Qui sommes-nous - Pizza Nova</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <?php $base = '';
-require_once '../includes/nav.php'; ?>
+require_once(__DIR__ . '/includes/nav.php'); ?>
 <main class="container">
     <section class="histoire-centenaire">
         <h1>Pizza Nova : Une Tradition familiale depuis 1970</h1>
