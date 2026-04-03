@@ -42,7 +42,13 @@ function connecter_utilisateur(array $utilisateur): void {
 }
 
 function deconnecter(): void {
-    session_destroy();
+    // On ouvre la session pour pouvoir la fermer ensuite
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $_SESSION = array(); // On vide les données de l'utilisateur en cours
+    session_destroy(); // On detruit le fichier de session
     header('Location: connexion.php');
     exit;
 }
