@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/session.php';
-require_once '../includes/donnees.php';
+require_once(__DIR__ . '/includes/session.php');
+require_once(__DIR__ . '/includes/donnees.php');
 
 // Si déjà connecté, rediriger
 if (est_connecte()) {
@@ -53,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Connexion - Pizza Nova</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <?php $base = '';
-require_once '../includes/nav.php'; ?>
+require_once(__DIR__ . '/includes/nav.php'); ?>
 <main>
     <section class="form-container">
         <h2>Connexion à votre espace</h2>
