@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/session.php';
-require_once '../includes/donnees.php';
+require_once(__DIR__ . '/includes/session.php');
+require_once(__DIR__ . '/includes/donnees.php');
 
 // Plats mis en avant sur la page d'accueil
 $plats_phares_ids = [1, 4, 5]; // Margherita, Calzone, Veggie
@@ -12,11 +12,11 @@ $plats_phares = array_filter(get_tous_plats(), fn($p) => in_array($p['id'], $pla
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizza Nova - Accueil</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <?php $base = '';
-require_once '../includes/nav.php'; ?>
+require_once(__DIR__ . '/includes/nav.php'); ?>
 
 <section class="hero">
     <div class="hero-container">
