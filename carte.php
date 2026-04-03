@@ -1,6 +1,7 @@
 <?php
-require_once '../includes/session.php';
-require_once '../includes/donnees.php';
+require_once(__DIR__ . '/includes/session.php');
+require_once(__DIR__ . '/includes/donnees.php');
+
 
 $tous_plats = get_tous_plats();
 $categorie  = $_GET['cat'] ?? 'toutes';
@@ -35,11 +36,11 @@ $menus = get_tous_menus();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Carte - Pizza Nova</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <?php $base = '';
-require_once '../includes/nav.php'; ?>
+require_once(__DIR__ . '/includes/nav.php'); ?>
 <main class="container">
     <section class="menu-header">
         <h1>Notre Carte Artisanale</h1>
