@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/session.php';
-require_once '../includes/donnees.php';
+require_once(__DIR__ . '/includes/session.php');
+require_once(__DIR__ . '/includes/donnees.php');
 exiger_role('admin');
 
 $message = '';
