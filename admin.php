@@ -102,6 +102,43 @@ $nb_commandes = count(get_toutes_commandes());
         </div>
     </div>
 
+    <!-- Avis -->
+    <div class="admin-filters">
+        <h2>Derniers avis reçus</h2>
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Commande</th>
+                    <th>Client</th>
+                    <th>Note Produits</th>
+                    <th>Note Livraison</th>
+                    <th>Commentaire</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $commandes = get_toutes_commandes();
+                foreach ($commandes as $c): 
+                    if (isset($c['note_produits'])): // On n'affiche que celles qui ont une note
+                        $client_avis = get_utilisateur_par_id($c['client_id']);
+                ?>
+                <tr>
+                    <td>#<?= $c['id'] ?></td>
+                    <td><?= htmlspecialchars($client_avis['prenom'] ?? 'Inconnu') ?></td>
+                    <td><?= str_repeat('⭐', $c['note_produits']) ?></td>
+                    <td><?= str_repeat('⭐', $c['note_livraison']) ?></td>
+                    <td><em><?= htmlspecialchars($c['commentaire'] ?? '') ?></em></td>
+                </tr>
+                <?php 
+                    endif;
+                endforeach; 
+                ?>
+            </tbody>
+        </table>
+    </div>
+
     <!-- Filtres -->
     <div class="admin-filters">
         <a href="admin.php?filtre=tous"    class="filter-btn <?= $filtre === 'tous'    ? 'active' : '' ?>">Tous (<?= count(get_tous_utilisateurs()) ?>)</a>
