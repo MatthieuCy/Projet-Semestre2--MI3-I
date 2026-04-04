@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) 
 <head>
     <meta charset="UTF-8">
     <title>Mon Panier - Pizza Nova</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php 
