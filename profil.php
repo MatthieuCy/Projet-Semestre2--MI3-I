@@ -3,37 +3,36 @@ require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
 exiger_connexion();
 
-$u = get_utilisateur_connecte();
+$u    = get_utilisateur_connecte();
+$role = $u['role'];
+
+// Rediriige les rôles vers leur page 
+if ($role === 'restaurateur') { header('Location: restaurateur.php'); exit; }
+if ($role === 'livreur')      { header('Location: livraison.php');    exit; }
+if ($role === 'admin')        { header('Location: admin.php');        exit; }
+
+// PAGE CLIENT
 $commandes_brutes = get_commandes_client($u['id']);
 $commandes = array_values($commandes_brutes);
+usort($commandes, fn($a, $b) => strcmp($b['date_commande'], $a['date_commande']));
 
-// Tri des commandes par date décroissante 
-usort($commandes, function($a, $b) {
-    if ($a['date_commande'] == $b['date_commande']) {
-        return 0;
-    }
-    return ($b['date_commande'] > $a['date_commande']) ? 1 : -1;
-});
-
-
-$statut_labels = array(
+$statut_labels = [
     'en_attente'     => '⏳ En attente',
     'en_preparation' => '👨‍🍳 En préparation',
     'en_livraison'   => '🛵 En livraison',
     'livree'         => '✅ Livrée',
-    'annulee'        => '❌ Annulée'
-);
-
-$statut_classes = array(
+    'annulee'        => '❌ Annulée',
+];
+$statut_classes = [
     'en_attente'     => 'status-wait',
     'en_preparation' => 'status-prep',
     'en_livraison'   => 'status-delivery',
     'livree'         => 'status-delivered',
-    'annulee'        => 'status-cancelled'
-);
+    'annulee'        => 'status-cancelled',
+];
 
-$remise = $u['remise'];
-$points = $u['points_fidelite'];
+$remise = $u['remise'] ?? 0;
+$points = $u['points_fidelite'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -44,60 +43,54 @@ $points = $u['points_fidelite'];
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<?php 
-    $base = '../';
-    require_once(__DIR__ . '/includes/nav.php'); 
-?>
+<?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
 
 <main class="profile-container">
     <section class="profile-header">
-        <h2>Bienvenue sur votre espace, <?php echo htmlspecialchars($u['prenom']); ?> !</h2>
-        <h3>Gérez vos informations et profitez de vos avantages fidélité.</h3>
+        <h2>Bienvenue, <?= htmlspecialchars($u['prenom']) ?> !</h2>
+        <p>Gérez vos informations et profitez de vos avantages fidélité.</p>
     </section>
-
+ 
     <div class="profile-grid">
+
+        <!-- Infos personnelles -->
         <aside class="profile-card">
             <h3>Mes Informations ✎</h3>
+            <?php
+            $champs = [
+                'Nom'       => $u['nom'],
+                'Prénom'    => $u['prenom'],
+                'Email'     => $u['login'],
+                'Téléphone' => $u['telephone'] ?: 'Non renseigné',
+                'Adresse'   => $u['adresse']   ?: 'Non renseignée',
+                'Détails'   => $u['details']   ?: 'Aucun',
+            ];
+            foreach ($champs as $label => $valeur): ?>
             <div class="info-item">
-                <div><strong>Nom :</strong> <span><?php echo htmlspecialchars($u['nom']); ?></span></div>
+                <div><strong><?= $label ?> :</strong> <span><?= htmlspecialchars($valeur) ?></span></div>
                 <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
             </div>
-            <div class="info-item">
-                <div><strong>Prénom :</strong> <span><?php echo htmlspecialchars($u['prenom']); ?></span></div>
-                <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
-            </div>
-            <div class="info-item">
-                <div><strong>Email :</strong> <span><?php echo htmlspecialchars($u['login']); ?></span></div>
-                <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
-            </div>
-            <div class="info-item">
-                <div><strong>Téléphone :</strong> <span><?php echo htmlspecialchars($u['telephone'] ? $u['telephone'] : 'Non renseigné'); ?></span></div>
-                <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
-            </div>
-            <div class="info-item">
-                <div><strong>Adresse :</strong> <span><?php echo htmlspecialchars($u['adresse'] ? $u['adresse'] : 'Non renseignée'); ?></span></div>
-                <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
-            </div>
-            <div class="info-item">
-                <div><strong>Détails :</strong> <span><?php echo htmlspecialchars($u['details'] ? $u['details'] : 'Aucun'); ?></span></div>
-                <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
-            </div>
+            <?php endforeach; ?>
             <p class="note-phase"><em>✏️ La modification sera effective en Phase 3.</em></p>
         </aside>
 
+        <!-- Points fidélité -->
         <section class="profile-card loyalty">
             <h3>Points Fidélité 🏆</h3>
             <div class="points-box">
-                <strong><?php echo $points; ?></strong> points cumulés
+                <strong><?= $points ?></strong> points cumulés
             </div>
             <?php if ($remise > 0): ?>
-                <p><em>Vous avez droit à <strong><?php echo $remise; ?>%</strong> de remise sur votre prochaine commande !</em></p>
+                <p><em>Vous bénéficiez de <strong><?= $remise ?>%</strong> de remise sur votre prochaine commande !</em></p>
             <?php else: ?>
                 <p><em>Continuez à commander pour débloquer des remises !</em></p>
             <?php endif; ?>
-            <p class="statut-compte">Statut : <span class="badge-statut badge-<?php echo $u['statut']; ?>"><?php echo ucfirst($u['statut']); ?></span></p>
+            <p class="statut-compte">
+                Statut : <span class="badge-statut badge-<?= $u['statut'] ?>"><?= ucfirst($u['statut']) ?></span>
+            </p>
         </section>
 
+        <!-- Historique commandes -->
         <section class="profile-card history">
             <h3>Mes Commandes</h3>
             <?php if (empty($commandes)): ?>
@@ -108,7 +101,7 @@ $points = $u['points_fidelite'];
                     <tr>
                         <th>N°</th>
                         <th>Date</th>
-                        <th>Détails</th>
+                        <th>Articles</th>
                         <th>Total</th>
                         <th>Statut</th>
                         <th>Note</th>
@@ -117,33 +110,30 @@ $points = $u['points_fidelite'];
                 <tbody>
                 <?php foreach ($commandes as $cmd): ?>
                     <tr>
-                        <td>#<?php echo $cmd['id']; ?></td>
-                        <td><?php echo date('d/m/Y H:i', strtotime($cmd['date_commande'])); ?></td>
+                        <td>#<?= $cmd['id'] ?></td>
+                        <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
                         <td>
                             <?php foreach ($cmd['articles'] as $art): ?>
-                                <?php echo $art['quantite']; ?>x <?php echo htmlspecialchars($art['nom']); ?><br>
+                                <?= $art['quantite'] ?>× <?= htmlspecialchars($art['nom']) ?><br>
                             <?php endforeach; ?>
                         </td>
-                        <td><?php echo number_format($cmd['total'], 2); ?> €</td>
+                        <td><?= number_format($cmd['total'], 2) ?> €</td>
                         <td>
-                            <?php 
-                                $classe = isset($statut_classes[$cmd['statut']]) ? $statut_classes[$cmd['statut']] : '';
-                                $label = isset($statut_labels[$cmd['statut']]) ? $statut_labels[$cmd['statut']] : $cmd['statut'];
-                            ?>
-                            <span class="<?php echo $classe; ?>">
-                                <?php echo $label; ?>
+                            <span class="<?= $statut_classes[$cmd['statut']] ?? '' ?>">
+                                <?= $statut_labels[$cmd['statut']] ?? $cmd['statut'] ?>
                             </span>
                         </td>
                         <td>
-                            <?php 
-                            $note = isset($cmd['note_produits']) ? $cmd['note_produits'] : null;
-                            if ($cmd['statut'] == 'livree' && $note === null) {
-                                echo '<a href="notation.php?commande_id=' . $cmd['id'] . '" class="btn-ok">Noter</a>'; } 
-                             else if ($note !== null) {
-                                echo "⭐ " . $note . "/5"; } 
-                            else {
-                                echo "—"; }
+                            <?php
+                            $note = $cmd['note_produits'] ?? null;
+                            if ($cmd['statut'] === 'livree' && $note === null):
                             ?>
+                                <a href="notation.php?commande_id=<?= $cmd['id'] ?>" class="btn-ok">Noter</a>
+                            <?php elseif ($note !== null): ?>
+                                ⭐ <?= $note ?>/5
+                            <?php else: ?>
+                                —
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -151,14 +141,20 @@ $points = $u['points_fidelite'];
             </table>
             <?php endif; ?>
         </section>
+
     </div>
 
-    <?php if ($u['role'] == 'client'): ?>
     <div style="text-align:center; margin-top:30px;">
         <a href="carte.php" class="btn-main">🍕 Commander maintenant</a>
     </div>
-    <?php endif; ?>
 </main>
+
+<footer>
+    <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p>
+</footer>
+</body>
+</html>
+
 
 <footer>
     <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p>
