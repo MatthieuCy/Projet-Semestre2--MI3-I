@@ -92,9 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) 
     elseif (!verifier_paiement_cybank($total_remise, $num_carte)) {
         $message = "❌ Erreur de paiement : Numéro de carte invalide ou refusé.";
     } 
-    } else {
-        $type_commande = $_POST['type_commande'];
-        
+     else {
+        $type_commande = $_POST['type_commande'] ?? 'livraison';
         $adresse = 'sur_place';
         if ($type_commande === 'livraison') {
             $adresse = ($u['adresse']) ? $u['adresse'] : 'Non renseignée';
@@ -105,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) 
             $details = ($u['details']) ? $u['details'] : '';
         }
 
-        $date_souhaitee = $_POST['date_souhaitee'];
+       $date_souhaitee = $_POST['date_souhaitee'] ?? '';
         if (empty($date_souhaitee)) {
             $date_souhaitee = date('Y-m-d H:i:s', strtotime('+45 minutes'));
         }
