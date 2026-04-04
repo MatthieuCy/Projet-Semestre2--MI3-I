@@ -648,3 +648,24 @@ footer {
     .profile-grid { grid-template-columns: 1fr; }
     .admin-stats { flex-direction: column; }
 }
+
+/* Ajustement d'un souci d'affichage sur la page du profil de l'admin */
+.table-wrapper {
+    margin-bottom: 40px; 
+    clear: both; 
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    display: block;
+    width: 100%;
+}
+
+.admin-filters {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
