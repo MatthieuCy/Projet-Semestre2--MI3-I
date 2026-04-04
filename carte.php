@@ -12,7 +12,7 @@ $plats_affiches = $tous_plats;
 if ($categorie !== 'toutes') {
     $plats_affiches = array_filter($plats_affiches, fn($p) => $p['categorie'] === $categorie);
 }
-if ($filtre_reg === 'sans_gluten') {feat: conversion de la carte statique en page dynamique PHP
+if ($filtre_reg === 'sans_gluten') {
     $plats_affiches = array_filter($plats_affiches, fn($p) => $p['sans_gluten'] === true);
 }
 if ($filtre_reg === 'sans_lactose') {
