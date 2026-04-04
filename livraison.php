@@ -1,10 +1,16 @@
 <?php
 require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
-
 exiger_connexion();
 
-$u       = get_utilisateur_connecte();
+$u = get_utilisateur_connecte();
+
+// Seul un livreur (ou admin) peut accéder à cette page
+if ($u['role'] !== 'livreur' && $u['role'] !== 'admin') {
+    header('Location: profil.php');
+    exit;
+}
+
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($commande && $commande['livreur_id'] === $u['id']) {
         if ($action === 'livree') {
-            $commande['statut']                   = 'livree';
-            $commande['date_livraison_effective']  = date('Y-m-d H:i:s');
+            $commande['statut']                  = 'livree';
+            $commande['date_livraison_effective'] = date('Y-m-d H:i:s');
             // +10 points fidélité pour le client
             $client = get_utilisateur_par_id($commande['client_id']);
             if ($client) {
@@ -23,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 sauvegarder_utilisateur($client);
             }
             sauvegarder_commande($commande);
-            $message = 'Livraison confirmée ! Le client a été notifié.';
+            $message = 'Livraison confirmée ! Le client a bien reçu sa commande.';
         } elseif ($action === 'abandonnee') {
             $commande['statut'] = 'annulee';
             sauvegarder_commande($commande);
@@ -40,31 +46,33 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livraison - Pizza Nova</title>
+    <title>Ma Livraison - Pizza Nova</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<?php $base = '../';
-require_once(__DIR__ . '/includes/nav.php');?>
+<?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
+
 <main class="container-mobile">
+
+    <!-- En-tête livreur -->
+    <section class="entete-livraison">
+        <h2>Espace Livreur</h2>
+        <p>Bonjour, <strong><?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></strong> 👋</p>
+    </section>
 
     <?php if ($message): ?>
         <p class="message-succes"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
     <?php if (!$commande_en_cours): ?>
-        <section class="entete-livraison">
-            <h2>Aucune livraison assignée</h2>
-            <p>En attente d'une nouvelle commande...</p>
+        <section class="entete-livraison" style="margin-top:20px;">
+            <p>Aucune livraison assignée pour le moment.</p>
+            <p>En attente d'une nouvelle course... 🛵</p>
         </section>
     <?php else: ?>
-        <section class="entete-livraison">
-            <h2>Course n°<?= $commande_en_cours['id'] ?></h2>
-        </section>
-
         <section class="infos-client-livraison">
             <div class="carte-livraison">
-                <h3>🏠 Destination</h3>
+                <h3>🏠 Destination — Course n°<?= $commande_en_cours['id'] ?></h3>
                 <p><strong>Client :</strong>
                     <?= $client ? htmlspecialchars($client['prenom'].' '.$client['nom']) : 'Inconnu' ?>
                 </p>
@@ -81,19 +89,16 @@ require_once(__DIR__ . '/includes/nav.php');?>
                 <h3>📦 Articles</h3>
                 <ul>
                     <?php foreach ($commande_en_cours['articles'] as $art): ?>
-                        <li><?= $art['quantite'] ?>x <?= htmlspecialchars($art['nom']) ?></li>
+                        <li><?= $art['quantite'] ?>× <?= htmlspecialchars($art['nom']) ?></li>
                     <?php endforeach; ?>
                 </ul>
                 <p><strong>Total :</strong> <?= number_format($commande_en_cours['total'], 2) ?> €</p>
                 <p><strong>Paiement :</strong>
-                    <?= $commande_en_cours['paiement_statut'] === 'paye' ? '✅ Déjà payé' : '⚠️ Non payé' ?>
+                    <?= $commande_en_cours['paiement_statut'] === 'paye' ? '✅ Déjà payé' : '⚠️ À encaisser' ?>
                 </p>
             </div>
 
-            <?php
-            $adresse_encoded = urlencode($commande_en_cours['adresse_livraison']);
-            ?>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=<?= $adresse_encoded ?>"
+            <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($commande_en_cours['adresse_livraison']) ?>"
                target="_blank" class="btn-gps" style="display:block; text-align:center; margin:15px 0;">
                 🗺️ LANCER L'ITINÉRAIRE
             </a>
@@ -104,37 +109,18 @@ require_once(__DIR__ . '/includes/nav.php');?>
                 <button type="submit" class="btn-valider-livraison">✅ MARQUER COMME LIVRÉE</button>
             </form>
 
-            <form method="post" action="livraison.php" >
+            <form method="post" action="livraison.php" style="margin-top:10px;">
                 <input type="hidden" name="commande_id" value="<?= $commande_en_cours['id'] ?>">
                 <input type="hidden" name="action" value="abandonnee">
-                <button type="submit" class="btn-valider-livraison" >
-                    ❌ ADRESSE INTROUVABLE
-                </button>
+                <button type="submit" class="btn-valider-livraison btn-danger-livraison">❌ ADRESSE INTROUVABLE</button>
             </form>
         </section>
     <?php endif; ?>
+
 </main>
+
 <footer class="footer-mobile">
     <p>&copy; 2025-2026 Projet Pizza Nova - Ibrahim, Ikram &amp; Matthieu</p>
 </footer>
-</body>
-</html>                <p><strong>Adresse :</strong> 123 Rue de l'Université, 95000 Cergy</p>
-                <p><strong>Détails :</strong> Bâtiment X, Xème étage, Code 01234</p>
-            </div>
-
-            <a href="https://www.google.com/maps" target="_blank" class="btn-gps">
-                LANCER L'ITINÉRAIRE 
-            </a>
-            
-            <button class="btn-valider-livraison">
-                ✅ MARQUER COMME LIVRÉE
-            </button>
-        </section>
-    </main>
-
-    <footer class="footer-mobile">
-        <p>&copy; 2025-2026 Projet Pizza Nova - Ibrahim, Ikram & Matthieu</p>
-    </footer>
-
 </body>
 </html>
