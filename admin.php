@@ -51,66 +51,7 @@ $statut_options = ['actif', 'premium', 'vip', 'bloque'];
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<?php $base = '../';<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Administration - Pizza Nova</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-
-    <header>
-        <nav>
-            <div class="logo">🍕 Pizza Nova</div>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="carte.html">La Carte</a></li>
-                <li><a href="identite.html">Qui sommes-nous</a></li>
-                <li><a href="inscription.html">S'inscrire</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="restaurateur.html">Cuisine</a></li>
-                <li><a href="livraison.html">Livreur</a></li>
-                <li><a href="profil.html">Mon profil</a></li>
-                <li><a href="notation.html">Nous Noter</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <h2>Tableau de Bord Administrateur</h2>
-        <h3>Gestion des utilisateurs et des rôles.</h3>
-      
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Rôle</th>
-                <th>Dernière commande</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                 <!--  DONNEES FICTIVES EN ATTENTE DE LA PHASE 2 -->
-                <td>X</td>
-                <td>MR..</td>
-                <td>Client</td>
-                <td>XX/XX/XXXX</td>
-                <td><a href="profil.html">Voir Profil</a></td>
-            </tr>
-        </tbody>
-    </table>
-</main>
-
-    <footer>
-        <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram & Matthieu</p>
-    </footer>
-
-</body>
-</html>
+<?php $base = '../';
 require_once '../includes/nav.php'; ?>
 <main class="container">
     <h1>Panneau d'Administration</h1>
