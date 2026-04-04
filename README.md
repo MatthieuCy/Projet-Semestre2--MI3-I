@@ -6,7 +6,7 @@
 pizza_nova/
 ├── style.css              ← Feuille de style commune
 │
-├── vues/                  ← TOUS les fichiers PHP sont ici
+├── vues/                  ←   fichiers PHP 
 │   ├── index.php          → Accueil
 │   ├── carte.php          → La carte des produits
 │   ├── connexion.php      → Connexion
