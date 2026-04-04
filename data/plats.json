@@ -69,7 +69,7 @@
     "sans_gluten": false,
     "sans_lactose": true,
     "vegetarien": true,
-    "image": "images/pizza_etudiante.jpg"
+    "image": "images/pizza_étudiante.jpg"
   },
   {
     "id": 7,
@@ -81,7 +81,7 @@
     "sans_gluten": false,
     "sans_lactose": true,
     "vegetarien": false,
-    "image": "images/margherita.jpg"
+    "image": "images/napoli.jpg"
   },
   {
     "id": 8,
@@ -93,7 +93,7 @@
     "sans_gluten": false,
     "sans_lactose": false,
     "vegetarien": false,
-    "image": "images/regina.jpg"
+    "image": "images/diavola.jpg"
   },
   {
     "id": 9,
@@ -177,7 +177,7 @@
     "sans_gluten": false,
     "sans_lactose": false,
     "vegetarien": true,
-    "image": "images/tiramisu.jpg"
+    "image": "images/cannoli.jpg"
   },
   {
     "id": 16,
@@ -189,7 +189,7 @@
     "sans_gluten": false,
     "sans_lactose": false,
     "vegetarien": false,
-    "image": "images/ingredients.jpg"
+    "image": "images/cesar.jpg"
   },
   {
     "id": 17,
@@ -201,6 +201,6 @@
     "sans_gluten": false,
     "sans_lactose": true,
     "vegetarien": true,
-    "image": "images/ingredients.jpg"
+    "image": "images/bruschetta.jpg"
   }
 ]
