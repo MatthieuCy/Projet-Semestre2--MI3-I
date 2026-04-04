@@ -70,7 +70,7 @@ $nb_commandes = count(get_toutes_commandes());
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration - Pizza Nova</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
