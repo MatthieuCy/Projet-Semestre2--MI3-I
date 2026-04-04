@@ -143,3 +143,14 @@ function get_livreurs_disponibles(): array {
     }
     return array_filter($livreurs, fn($l) => !in_array($l['id'], $occupes));
 }
+
+//CYBANK
+function verifier_paiement_cybank($montant, $numero_carte) {
+    // Pour la Phase 2, on simule une acceptation si le montant est > 0
+    if ($montant > 0 && strlen($numero_carte) >= 12) {
+        return true;
+    }
+    return false;
+}
+
+?>
