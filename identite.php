@@ -29,8 +29,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
                 jalousement, a plus de 50 ans d'âge !</p>
 
                 <div class="conteneur-image">
-                    <img src="../images/pizzeria.png.png" alt="Pizzeria à sa création" class="pizza-img"
-                         onerror="this.src='images/margherita.jpg'">
+                    <img src="images/pizzeria.png.png" alt="Pizzeria à sa création" class="pizza-img">
                 </div>
 
                 <section class="notre-equipe">
