@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/session.php';
-require_once '../includes/donnees.php';
+require_once(__DIR__ . '/includes/session.php');
+require_once(__DIR__ . '/includes/donnees.php');
 exiger_connexion();
 
 $u           = get_utilisateur_connecte();
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erreur = 'Commande introuvable.';
     } elseif ($commande_a_noter['statut'] !== 'livree') {
         $erreur = 'Cette commande n\'a pas encore été livrée.';
-    } elseif ($commande_a_noter['note_produits'] !== null) {
+    } elseif (isset($commande_a_noter['note_produits']) && $commande_a_noter['note_produits'] !== null) {
         $erreur = 'Cette commande a déjà été notée.';
     } elseif ($note_produits < 1 || $note_produits > 5 || $note_livraison < 1 || $note_livraison > 5) {
         $erreur = 'Veuillez donner une note entre 1 et 5 pour chaque critère.';
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php $base = '../';
-require_once '../includes/nav.php'; ?>
+require_once(__DIR__ . '/includes/nav.php'); ?>
 <main class="container">
     <h2>Votre avis nous intéresse !</h2>
     <h3>Merci d'avoir commandé chez Pizza Nova.</h3>
