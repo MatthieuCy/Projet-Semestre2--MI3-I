@@ -6,7 +6,7 @@ require_once(__DIR__ . '/includes/session.php');
 <head>
     <meta charset="UTF-8">
     <title>Qui sommes-nous - Pizza Nova</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = '';
