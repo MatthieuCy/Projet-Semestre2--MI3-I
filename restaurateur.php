@@ -90,7 +90,7 @@ $type_labels = [
                 <article class="commande commande-attente">
                     <div class="commande-header">
                         <h4>Commande #<?= $c['id'] ?></h4>
-                        <span class="badge-type"><?= $type_labels[$c['type']] ?? $c['type'] ?></span>
+                        <span class="badge-type"><?= $type_labels[$c['type'] ?? ''] ?? $c['type'] ?></span>
                     </div>
                     <p><strong>Client :</strong> <?= htmlspecialchars($client ? $client['prenom'].' '.$client['nom'] : 'Inconnu') ?></p>
                     <p class="commande-heure">⏰ <?= date('H:i', strtotime($c['date_commande'])) ?></p>
@@ -121,7 +121,7 @@ $type_labels = [
                 <article class="commande commande-preparation">
                     <div class="commande-header">
                         <h4>Commande #<?= $c['id'] ?></h4>
-                        <span class="badge-type"><?= $type_labels[$c['type']] ?? $c['type'] ?></span>
+                        <span class="badge-type"><?= $type_labels[$c['type'] ?? ''] ?? $c['type'] ?></span>
                     </div>
                     <p><strong>Client :</strong> <?= htmlspecialchars($client ? $client['prenom'] : 'Inconnu') ?></p>
                     <ul class="commande-articles">
