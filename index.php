@@ -41,20 +41,17 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
     <div class="grid-pizzas">
         <article class="commande">
             <h3 class="highlight-title">Savoir-faire Artisanal</h3>
-            <img src="../images/savoir-faire.jpg" alt="Pétrissage de la pâte" class="pizza-img"
-                 onerror="this.src='images/margherita.jpg'">
+            <img src="images/savoir-faire.jpg" alt="Pétrissage de la pâte" class="pizza-img">
             <p>Nos pizzaïolos travaillent une pâte pétrie chaque matin, laissée au repos 72h pour une légèreté incomparable.</p>
         </article>
         <article class="commande">
             <h3 class="highlight-title">Ingrédients de qualité</h3>
-            <img src="../images/ingredients.jpg" alt="Ingrédients frais" class="pizza-img"
-                 onerror="this.src='images/margherita.jpg'">
+            <img src="images/ingredients.jpg" alt="Ingrédients frais" class="pizza-img">
             <p>De la mozzarella fior di latte aux tomates bio de saison, nous sélectionnons uniquement le meilleur pour vos papilles.</p>
         </article>
         <article class="commande">
             <h3 class="highlight-title">Livraison instantanée</h3>
-            <img src="../images/livraison.jpg" alt="Livreur de pizza" class="pizza-img"
-                 onerror="this.src='images/margherita.jpg'">
+            <img src="images/livraison.jpg" alt="Livreur de pizza" class="pizza-img">
             <p>Commandez en quelques clics et recevez votre pizza fumante grâce à notre réseau de livreurs ultra-réactifs.</p>
         </article>
     </div>
