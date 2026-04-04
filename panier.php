@@ -83,8 +83,15 @@ $commande_passee = false;
 $id_nouvelle_commande = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) {
+    $num_carte = $_POST['num_carte'] ?? ''; // On récupère le numéro
+
     if (empty($_SESSION['panier'])) {
         $message = 'Votre panier est vide.';
+    } 
+    // AJOUT DE LA VÉRIFICATION CYBANK
+    elseif (!verifier_paiement_cybank($total_remise, $num_carte)) {
+        $message = "❌ Erreur de paiement : Numéro de carte invalide ou refusé.";
+    } 
     } else {
         $type_commande = $_POST['type_commande'];
         
@@ -247,9 +254,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) 
         <?php } else { ?>
             <p>⚠️ Aucune adresse enregistrée. <a href="profil.php">Mettre à jour mon profil</a></p>
         <?php } ?>
-
+                  
+        <div class="form-group">
+            <label for="num_carte">Numéro de carte (Paiement CYBank)</label>
+            <input type="text" id="num_carte" name="num_carte" placeholder="Min. 12 caractères" required>
+        </div>
         <div class="infos-pratiques">
-            <strong>💳 Paiement </strong>
+            <strong>💳 Paiement CYBank </strong>
             <p>Total : <?php echo number_format($total_remise, 2); ?> €</p>
         </div>
 
