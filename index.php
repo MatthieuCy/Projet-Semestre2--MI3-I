@@ -21,7 +21,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
 <section class="hero">
     <div class="hero-container">
         <div class="hero-image">
-            <img src="../images/Vito.png" alt="Vito Nova">
+            <img src="images/Vito.png" alt="Vito Nova">
         </div>
         <div class="hero-content">
             <h1>L'excellence de la pizzeria façon CY</h1>
