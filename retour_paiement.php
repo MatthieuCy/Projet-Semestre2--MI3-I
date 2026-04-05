@@ -19,7 +19,17 @@ $control_verif = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $ven
 if ($statut === 'accepted' && $control_recu === $control_verif) {
     // On crée la commande dans le JSON 
     $temp = $_SESSION['temp_commande'];
-    
+    $type_choisi = $temp['type_commande'];
+
+    // Définir l'affichage de l'adresse selon le choix du client 
+    if ($type_choisi === 'livraison') {
+        $adresse_finale = $u['adresse'] ?? 'Adresse non renseignée';
+    } elseif ($type_choisi === 'emporter') {
+        $adresse_finale = 'À emporter';
+    } else {
+        $adresse_finale = 'Sur place';
+    }
+
     $articles = [];
     foreach ($_SESSION['panier'] as $item) {
         $articles[] = [
@@ -35,21 +45,19 @@ if ($statut === 'accepted' && $control_recu === $control_verif) {
         'client_id' => $u['id'],
         'articles' => $articles,
         'total' => (float)$montant,
-        'adresse_livraison' => ($temp['type_commande'] === 'livraison') ? ($u['adresse'] ?? 'Non renseignée') : 'sur_place',
-        'type' => $temp['type_commande'],
-        'statut' => 'en_attente',
-        'date_commande' => date('Y-m-d H:i:s'),
-        'date_livraison_souhaitee' => $temp['date_souhaitee'],
-        'paiement_statut' => 'paye'
+        'adresse_livraison' => $adresse_finale, 
+        'type' => $type_choisi,
+        'statut' => 'en_attente', 
+        'date_commande' => date('Y-m-d H:i:s'), 
+        'date_livraison_souhaitee' => $temp['date_souhaitee'], 
+        'paiement_statut' => 'paye' 
     ];
 
     ajouter_commande($nouvelle_commande); 
     
     $_SESSION['panier'] = [];
     $message = "Commande validée avec succès !";
-} else {
-    $message = "Erreur : Le paiement a été refusé.";
-}
+    }
 ?>
 
 <!DOCTYPE html>
