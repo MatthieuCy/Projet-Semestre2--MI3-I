@@ -165,6 +165,7 @@ $id_nouvelle_commande = null;
         <label>Type de commande</label>
         <input type="radio" name="type_commande" value="livraison" checked> Livraison
         <input type="radio" name="type_commande" value="emporter"> À emporter
+        <input type="radio" name="type_commande" value="sur_place"> Sur place
     </div>
 
     <div class="form-group">
