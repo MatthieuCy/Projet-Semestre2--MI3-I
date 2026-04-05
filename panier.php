@@ -82,71 +82,6 @@ $total_remise = $total - $montant_remise;
 $commande_passee = false;
 $id_nouvelle_commande = null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) {
-    $num_carte = $_POST['num_carte'] ?? ''; // On récupère le numéro
-
-    if (empty($_SESSION['panier'])) {
-        $message = 'Votre panier est vide.';
-    } 
-    // AJOUT DE LA VÉRIFICATION CYBANK
-    elseif (!verifier_paiement_cybank($total_remise, $num_carte)) {
-        $message = "❌ Erreur de paiement : Numéro de carte invalide ou refusé.";
-    } 
-     else {
-        $type_commande = $_POST['type_commande'] ?? 'livraison';
-        $adresse = 'sur_place';
-        if ($type_commande === 'livraison') {
-            $adresse = ($u['adresse']) ? $u['adresse'] : 'Non renseignée';
-        }
-
-        $details = "";
-        if ($type_commande === 'livraison') {
-            $details = ($u['details']) ? $u['details'] : '';
-        }
-
-       $date_souhaitee = $_POST['date_souhaitee'] ?? '';
-        if (empty($date_souhaitee)) {
-            $date_souhaitee = date('Y-m-d H:i:s', strtotime('+45 minutes'));
-        }
-
-        $articles_commande = array();
-        foreach ($_SESSION['panier'] as $item) {
-            $articles_commande[] = array(
-                'type'          => $item['type'],
-                'id'            => $item['id'],
-                'quantite'      => $item['quantite'],
-                'nom'           => $item['nom'],
-                'prix_unitaire' => $item['prix'],
-            );
-        }
-
-        $nouvelle_commande = array(
-            'client_id'                => $u['id'],
-            'articles'                 => $articles_commande,
-            'total'                    => round($total_remise, 2),
-            'adresse_livraison'        => $adresse,
-            'details_livraison'        => $details,
-            'telephone_client'         => $u['telephone'],
-            'type'                     => $type_commande,
-            'statut'                   => 'en_attente',
-            'livreur_id'               => null,
-            'date_commande'            => date('Y-m-d H:i:s'),
-            'date_livraison_souhaitee' => $date_souhaitee,
-            'paiement_statut'          => 'paye',
-        );
-
-        $id_nouvelle_commande = ajouter_commande($nouvelle_commande);
-
-        
-        $u_db = get_utilisateur_par_id($u['id']);
-        $u_db['points_fidelite'] += (int)$total_remise;
-        sauvegarder_utilisateur($u_db);
-
-        $_SESSION['panier'] = array();
-        $commande_passee = true;
-        $message = "Commande #" . $id_nouvelle_commande . " passée avec succès !";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -223,47 +158,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valider_commande'])) 
 
     <a href="panier.php?action=vider" class="btn-ok">🗑️ Vider le panier</a>
 
-    <form method="post" action="panier.php" class="form-container">
-        <h3>Finaliser ma commande</h3>
+    <form method="post" action="paiement.php" class="form-container">
+    <h3>Finaliser ma commande</h3>
+    
+    <div class="form-group">
+        <label>Type de commande</label>
+        <input type="radio" name="type_commande" value="livraison" checked> Livraison
+        <input type="radio" name="type_commande" value="emporter"> À emporter
+    </div>
 
-        <div class="form-group">
-            <label>Type de commande</label>
-            <div class="rating-options">
-                <input type="radio" name="type_commande" id="tc_livraison" value="livraison" checked>
-                <label for="tc_livraison">🛵 Livraison</label>
-                
-                <input type="radio" name="type_commande" id="tc_emporter" value="emporter">
-                <label for="tc_emporter">🏃 À emporter</label>
-                
-                <input type="radio" name="type_commande" id="tc_surplace" value="sur_place">
-                <label for="tc_surplace">🪑 Sur place</label>
-            </div>
-        </div>
+    <div class="form-group">
+        <label for="date_souhaitee">Date/heure souhaitée</label>
+        <input type="datetime-local" name="date_souhaitee">
+    </div>
 
-        <div class="form-group">
-            <label for="date_souhaitee">Date/heure souhaitée</label>
-            <input type="datetime-local" id="date_souhaitee" name="date_souhaitee">
-        </div>
-
-        <?php if ($u['adresse']) { ?>
-            <div class="citation-familiale">
-                <p><strong>Adresse de livraison :</strong> <?php echo htmlspecialchars($u['adresse']); ?></p>
-                <p><small><?php echo htmlspecialchars($u['details']); ?></small></p>
-            </div>
-        <?php } else { ?>
-            <p>⚠️ Aucune adresse enregistrée. <a href="profil.php">Mettre à jour mon profil</a></p>
-        <?php } ?>
-                  
-        <div class="form-group">
-            <label for="num_carte">Numéro de carte (Paiement CYBank)</label>
-            <input type="text" id="num_carte" name="num_carte" placeholder="Min. 12 caractères" required>
-        </div>
-        <div class="infos-pratiques">
-            <strong>💳 Paiement CYBank </strong>
-            <p>Total : <?php echo number_format($total_remise, 2); ?> €</p>
-        </div>
-
-        <button type="submit" name="valider_commande" class="btn-main">✅ Confirmer et payer</button>
+    <button type="submit" class="btn-main">✅ Aller au paiement sécurisé CYBank</button>
     </form>
     <?php } ?>
 </main>
