@@ -4,9 +4,11 @@ require_once __DIR__ . '/session.php';
 $u    = get_utilisateur_connecte();
 $role = $u ? $u['role'] : null;
 ?>
+<link id="theme-css" rel="stylesheet" href="style.css">
+<script src="scripts/main.js" defer></script>
 <header>
     <nav>
-        <div class="logo">🍕 Pizza Nova</div>
+        <div class="logo"> Pizza Nova</div>
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="carte.php">La Carte</a></li>
@@ -39,3 +41,5 @@ $role = $u ? $u['role'] : null;
         </ul>
     </nav>
 </header>
+<button id="btn-theme" class="btn-theme-toggle" onclick="basculerTheme()"> Mode sombre</button>
+
