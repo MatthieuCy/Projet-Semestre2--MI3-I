@@ -74,7 +74,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
             <p class="message-succes"><?= htmlspecialchars($succes) ?> <a href="connexion.php">Se connecter</a></p>
         <?php endif; ?>
 
-        <form action="inscription.php" method="post">
+        <form id="form-inscription" action="inscription.php" method="post">
             <div class="form-group">
                 <label for="nom">Nom *</label>
                 <input type="text" id="nom" name="nom" required value="<?= htmlspecialchars($donnees['nom'] ?? '') ?>">
