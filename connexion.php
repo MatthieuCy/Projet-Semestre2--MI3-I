@@ -66,7 +66,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
             <p class="message-erreur"><?= htmlspecialchars($erreur) ?></p>
         <?php endif; ?>
 
-        <form action="connexion.php" method="post">
+        <form id="form-connexion" action="connexion.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse Email :</label>
                 <input type="email" id="email" name="email" required
