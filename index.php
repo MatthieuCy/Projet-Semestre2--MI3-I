@@ -12,7 +12,6 @@ $plats_phares = array_filter(get_tous_plats(), fn($p) => in_array($p['id'], $pla
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizza Nova - Accueil</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = '';
@@ -59,7 +58,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
 
 <!-- Plats du moment -->
 <section class="featured container-mobile">
-    <h2>🍕 Nos incontournables</h2>
+    <h2> Nos incontournables</h2>
     <div class="grid-pizzas">
         <?php foreach ($plats_phares as $plat): ?>
         <article class="pizza-card">
@@ -71,7 +70,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
                 <h3><?= htmlspecialchars($plat['nom']) ?></h3>
                 <p><?= htmlspecialchars($plat['description']) ?></p>
                 <span class="price"><?= number_format($plat['prix'], 2) ?> €</span>
-                <a href="carte.php" class="btn-add">Voir la carte 🍕</a>
+                <a href="carte.php" class="btn-add">Voir la carte </a>
             </div>
         </article>
         <?php endforeach; ?>
@@ -80,11 +79,11 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
 
 <section class="info-section container-mobile">
     <div class="carte-livraison">
-        <h3>📅 Nos Horaires</h3>
+        <h3> Nos Horaires</h3>
         <p>Lundi – Dimanche : 11h30–14h30 / 18h30–23h00</p>
         <br>
-        <p>📍 <strong>Localisation :</strong> 4 Rue du Prieuré, 95000 Cergy</p>
-        <p>📞 <strong>Téléphone :</strong> 01 02 03 04 05</p>
+        <p> <strong>Localisation :</strong> 4 Rue du Prieuré, 95000 Cergy</p>
+        <p> <strong>Téléphone :</strong> 01 02 03 04 05</p>
     </div>
 </section>
 
