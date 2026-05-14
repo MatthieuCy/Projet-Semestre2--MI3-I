@@ -6,7 +6,6 @@ require_once(__DIR__ . '/includes/session.php');
 <head>
     <meta charset="UTF-8">
     <title>Qui sommes-nous - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = '';
@@ -58,13 +57,13 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
             </div>
 
             <div class="infos-pratiques">
-                <h4>📍 Nous trouver</h4>
+                <h4> Nous trouver</h4>
                 <p>4 Rue du Prieuré, 95000 Cergy</p>
-                <h4>📞 Contact</h4>
+                <h4> Contact</h4>
                 <p>01 02 03 04 05</p>
-                <h4>📅 Horaires</h4>
+                <h4> Horaires</h4>
                 <p>Lun–Dim : 11h30–14h30<br>18h30–23h00</p>
-                <h4>👤 Équipe</h4>
+                <h4> Équipe</h4>
                 <p>Ibrahim, Ikram &amp; Matthieu<br>préING2 - CY Tech</p>
             </div>
         </div>
