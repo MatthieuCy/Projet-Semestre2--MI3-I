@@ -1,9 +1,7 @@
-// scripts/main.js — Phase 3 Pizza Nova
-// Règle : uniquement let et const, jamais var
 
-// ============================================================
+
 // 1. THEME CLAIR / SOMBRE avec cookie
-// ============================================================
+
 
 function appliquerTheme(theme) {
     const link = document.getElementById('theme-css');
@@ -38,9 +36,8 @@ function lireCookie(nom) {
     return null;
 }
 
-// ============================================================
 // 2. INITIALISATION AU CHARGEMENT DE LA PAGE
-// ============================================================
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -63,9 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initProfilEdition();
 });
 
-// ============================================================
+
 // 3. VALIDATION FORMULAIRE CONNEXION (côté client)
-// ============================================================
+=
 
 function initValidationConnexion() {
     const form = document.getElementById('form-connexion');
@@ -97,9 +94,8 @@ function initValidationConnexion() {
     });
 }
 
-// ============================================================
 // 4. VALIDATION FORMULAIRE INSCRIPTION (côté client)
-// ============================================================
+
 
 function initValidationInscription() {
     const form = document.getElementById('form-inscription');
@@ -152,9 +148,9 @@ function initValidationInscription() {
     });
 }
 
-// ============================================================
+
 // 5. COMPTEUR DE CARACTERES EN TEMPS REEL
-// ============================================================
+
 
 function initCompteurCaracteres() {
     const configs = [
@@ -180,9 +176,9 @@ function initCompteurCaracteres() {
     }
 }
 
-// ============================================================
+
 // 6. FILTRES ASYNCHRONES SUR LA CARTE (fetch / requête async)
-// ============================================================
+
 
 function initFiltresCarte() {
     const container = document.getElementById('grille-plats');
@@ -247,9 +243,9 @@ function chargerPlatsAsync(categorie, regime) {
         });
 }
 
-// ============================================================
+
 // 7. TRI DES PLATS COTE CLIENT (sans rechargement de page)
-// ============================================================
+
 
 function initTriCarte() {
     const selectTri = document.getElementById('select-tri');
@@ -281,9 +277,9 @@ function initTriCarte() {
     });
 }
 
-// ============================================================
+
 // 8. MODIFICATION DU PROFIL EN ASYNCHRONE (fetch)
-// ============================================================
+
 
 function initProfilEdition() {
     document.querySelectorAll('.edit-icon[data-champ]').forEach(el => {
@@ -367,9 +363,9 @@ function annulerEdition(champ, valeurOriginale) {
     crayon.innerHTML = `<span onclick="activerEditionChamp('${champ}')" title="Modifier" style="cursor:pointer;">✎</span>`;
 }
 
-// ============================================================
+
 // 9. FONCTIONS UTILITAIRES
-// ============================================================
+
 
 function estEmailValide(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
