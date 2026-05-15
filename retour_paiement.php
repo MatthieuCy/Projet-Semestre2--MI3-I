@@ -16,6 +16,9 @@ $control_recu = $_GET['control'] ?? '';
 // Vérification de sécurité
 $control_verif = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $statut . "#");
 
+$message         = "Le paiement a été refusé ou annulé.";
+$paiement_valide = false;
+
 if ($statut === 'accepted' && $control_recu === $control_verif) {
     // On crée la commande dans le JSON 
     $temp = $_SESSION['temp_commande'];
@@ -53,10 +56,11 @@ if ($statut === 'accepted' && $control_recu === $control_verif) {
         'paiement_statut' => 'paye' 
     ];
 
-    ajouter_commande($nouvelle_commande); 
-    
-    $_SESSION['panier'] = [];
-    $message = "Commande validée avec succès !";
+    $commande_id     = ajouter_commande($nouvelle_commande);
+    $_SESSION['panier']        = [];
+    $_SESSION['temp_commande'] = [];
+    $paiement_valide = true;
+    $message         = "Commande #{$commande_id} enregistrée avec succès !";
     }
 ?>
 
@@ -70,9 +74,15 @@ if ($statut === 'accepted' && $control_recu === $control_verif) {
 <body>
     <main class="container">
         <div class="form-container">
-            <h1><?php echo $statut === 'accepted' ? '✅ Merci !' : '❌ Erreur'; ?></h1>
-            <p><?php echo $message; ?></p>
-            <br>
+            <?php if ($paiement_valide): ?>
+               <h1>Merci pour votre commande !</h1>
+               <p><?= htmlspecialchars($message) ?></p>
+               <a href="profil.php" class="btn-main"> Suivre ma commande</a>
+            <?php else: ?>
+               <h1>Paiement refusé</h1>
+               <p><?= htmlspecialchars($message) ?></p>
+               <a href="panier.php" class="btn-main">← Retour au panier</a>
+            <?php endif; ?>
             <a href="index.php" class="btn-main">Retour à l'accueil</a>
         </div>
     </main>
