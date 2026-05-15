@@ -66,10 +66,12 @@ $points = $u['points_fidelite'] ?? 0;
                 'Détails'   => $u['details']   ?: 'Aucun',
             ];
             foreach ($champs as $label => $valeur): ?>
-            <div class="info-item">
-                <div><strong><?= $label ?> :</strong> <span><?= htmlspecialchars($valeur) ?></span></div>
-                <span class="edit-icon" title="Modifiable en Phase 3">✎</span>
-            </div>
+            <div class="info-item" data-champ="nom">
+    <div><strong>Nom :</strong>
+        <span class="valeur-champ">Alice</span>
+    </div>
+    <span class="edit-icon" data-champ="nom">✎</span>
+</div>
             <?php endforeach; ?>
             <p class="note-phase"><em>✏️ La modification sera effective en Phase 3.</em></p>
         </aside>
