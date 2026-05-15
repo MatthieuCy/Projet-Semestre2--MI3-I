@@ -11,11 +11,11 @@ $commandes = array_values(get_commandes_client($u['id']));
 usort($commandes, fn($a, $b) => strcmp($b['date_commande'], $a['date_commande']));
 
 $statut_labels = [
-    'en_attente'     => '⏳ En attente',
-    'en_preparation' => '👨‍🍳 En préparation',
-    'en_livraison'   => '🛵 En livraison',
-    'livree'         => '✅ Livrée',
-    'annulee'        => '❌ Annulée',
+    'en_attente'     => ' En attente',
+    'en_preparation' => ' En préparation',
+    'en_livraison'   => ' En livraison',
+    'livree'         => ' Livrée',
+    'annulee'        => ' Annulée',
 ];
 ?>
 <!DOCTYPE html>
