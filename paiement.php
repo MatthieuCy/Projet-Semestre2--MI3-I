@@ -25,7 +25,7 @@ $vendeur = "MI-3_I";
 $transaction = substr(md5(uniqid(mt_rand(), true)), 0, 15); // Id unique
 $url_retour = "http://localhost:8000/retour_paiement.php";
 
-// 3. Calcul de la valeur de contrôle (Hash MD5) 
+// Calcul de la valeur de contrôle (Hash MD5) 
 $api_key = getAPIKey($vendeur); 
 $control = md5($api_key . "#" . $transaction . "#" . $montant_formatte . "#" . $vendeur . "#" . $url_retour . "#");
 
@@ -37,8 +37,9 @@ $_SESSION['temp_commande'] = [
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><title>Redirection Paiement</title><link rel="stylesheet" href="style.css"></head>
+<head><meta charset="UTF-8"><title>Redirection Paiement</title></head>
 <body>
+    <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
     <main class="container">
         <div class="form-container">
             <h2>Redirection vers CYBank...</h2>
