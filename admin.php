@@ -11,26 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cible  = get_utilisateur_par_id($uid);
 
     if ($cible) {
-        if ($action === 'bloquer') {
-            $cible['statut'] = 'bloque';
+        if ($action === 'changer_statut') {
+            $cible['statut'] = $_POST['nouveau_statut'] ?? 'actif';
             sauvegarder_utilisateur($cible);
-            $message = "Compte de {$cible['prenom']} {$cible['nom']} bloqué.";
-        } elseif ($action === 'activer') {
-            $cible['statut'] = 'actif';
-            sauvegarder_utilisateur($cible);
-            $message = "Compte de {$cible['prenom']} {$cible['nom']} activé.";
-        } elseif ($action === 'changer_statut') {
-            $nouveau_statut = $_POST['nouveau_statut'] ?? 'actif';
-            $cible['statut'] = $nouveau_statut;
-            sauvegarder_utilisateur($cible);
-            $message = "Statut de {$cible['prenom']} {$cible['nom']} changé en « {$nouveau_statut} ».";
+            $message = "Statut de {$cible['prenom']} {$cible['nom']} changé.";
         } elseif ($action === 'changer_remise') {
-            $remise = (int)($_POST['remise'] ?? 0);
-            $cible['remise'] = max(0, min(50, $remise));
+            $cible['remise'] = max(0, min(50, (int)($_POST['remise'] ?? 0)));
             sauvegarder_utilisateur($cible);
             $message = "Remise de {$cible['prenom']} {$cible['nom']} définie à {$cible['remise']}%.";
         } elseif ($action === 'supprimer') {
-            // On ne peut pas supprimer son propre compte
             $connecte = get_utilisateur_connecte();
             if ($cible['id'] !== $connecte['id']) {
                 $tous = get_tous_utilisateurs();
@@ -46,22 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $tous_utilisateurs = get_tous_utilisateurs();
 $filtre = $_GET['filtre'] ?? 'tous';
-
-if ($filtre === 'clients') {
-    $tous_utilisateurs = array_filter($tous_utilisateurs, fn($u) => $u['role'] === 'client');
-} elseif ($filtre === 'staff') {
-    $tous_utilisateurs = array_filter($tous_utilisateurs, fn($u) => in_array($u['role'], ['admin','restaurateur','livreur']));
-} elseif ($filtre === 'bloques') {
-    $tous_utilisateurs = array_filter($tous_utilisateurs, fn($u) => $u['statut'] === 'bloque');
-}
+if ($filtre === 'clients') $tous_utilisateurs = array_filter($tous_utilisateurs, fn($u) => $u['role'] === 'client');
+elseif ($filtre === 'staff')   $tous_utilisateurs = array_filter($tous_utilisateurs, fn($u) => in_array($u['role'], ['admin','restaurateur','livreur']));
+elseif ($filtre === 'bloques') $tous_utilisateurs = array_filter($tous_utilisateurs, fn($u) => $u['statut'] === 'bloque');
 
 $statut_options = ['actif', 'premium', 'vip', 'bloque'];
-
-// Statistiques rapides
-$tous = get_tous_utilisateurs();
-$nb_total     = count($tous);
-$nb_clients   = count(array_filter($tous, fn($u) => $u['role'] === 'client'));
-$nb_bloques   = count(array_filter($tous, fn($u) => $u['statut'] === 'bloque'));
+$tous      = get_tous_utilisateurs();
+$nb_total  = count($tous);
+$nb_clients  = count(array_filter($tous, fn($u) => $u['role'] === 'client'));
+$nb_bloques  = count(array_filter($tous, fn($u) => $u['statut'] === 'bloque'));
 $nb_commandes = count(get_toutes_commandes());
 ?>
 <!DOCTYPE html>
@@ -70,60 +52,35 @@ $nb_commandes = count(get_toutes_commandes());
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
-
 <main class="container">
     <h1>Panneau d'Administration</h1>
 
+    <div id="message-admin">
     <?php if ($message): ?>
         <p class="message-succes"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
+    </div>
 
-    <!-- Statistiques -->
+    <!-- Stats -->
     <div class="admin-stats">
-        <div class="stat-card">
-            <span class="stat-number"><?= $nb_total ?></span>
-            <span class="stat-label">Utilisateurs</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number"><?= $nb_clients ?></span>
-            <span class="stat-label">Clients</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number"><?= $nb_commandes ?></span>
-            <span class="stat-label">Commandes</span>
-        </div>
-        <div class="stat-card stat-alert">
-            <span class="stat-number"><?= $nb_bloques ?></span>
-            <span class="stat-label">Bloqués</span>
-        </div>
+        <div class="stat-card"><span class="stat-number"><?= $nb_total ?></span><span class="stat-label">Utilisateurs</span></div>
+        <div class="stat-card"><span class="stat-number"><?= $nb_clients ?></span><span class="stat-label">Clients</span></div>
+        <div class="stat-card"><span class="stat-number"><?= $nb_commandes ?></span><span class="stat-label">Commandes</span></div>
+        <div class="stat-card stat-alert"><span class="stat-number"><?= $nb_bloques ?></span><span class="stat-label">Bloqués</span></div>
     </div>
 
-    <!-- Avis -->
-    <div class="admin-filters">
-        <h2>Derniers avis reçus</h2>
-    </div>
+    <!-- Derniers avis -->
+    <div class="admin-filters"><h2>Derniers avis reçus</h2></div>
     <div class="table-wrapper">
         <table>
-            <thead>
-                <tr>
-                    <th>Commande</th>
-                    <th>Client</th>
-                    <th>Note Produits</th>
-                    <th>Note Livraison</th>
-                    <th>Commentaire</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Commande</th><th>Client</th><th>Note Produits</th><th>Note Livraison</th><th>Commentaire</th></tr></thead>
             <tbody>
-                <?php 
-                $commandes = get_toutes_commandes();
-                foreach ($commandes as $c): 
-                    if (isset($c['note_produits'])): // On n'affiche que celles qui ont une note
-                        $client_avis = get_utilisateur_par_id($c['client_id']);
-                ?>
+            <?php foreach (get_toutes_commandes() as $c):
+                if (isset($c['note_produits']) && $c['note_produits'] !== null):
+                    $client_avis = get_utilisateur_par_id($c['client_id']); ?>
                 <tr>
                     <td>#<?= $c['id'] ?></td>
                     <td><?= htmlspecialchars($client_avis['prenom'] ?? 'Inconnu') ?></td>
@@ -131,41 +88,28 @@ $nb_commandes = count(get_toutes_commandes());
                     <td><?= str_repeat('⭐', $c['note_livraison']) ?></td>
                     <td><em><?= htmlspecialchars($c['commentaire'] ?? '') ?></em></td>
                 </tr>
-                <?php 
-                    endif;
-                endforeach; 
-                ?>
+            <?php endif; endforeach; ?>
             </tbody>
         </table>
     </div>
 
     <!-- Filtres -->
     <div class="admin-filters">
-        <a href="admin.php?filtre=tous"    class="filter-btn <?= $filtre === 'tous'    ? 'active' : '' ?>">Tous (<?= count(get_tous_utilisateurs()) ?>)</a>
-        <a href="admin.php?filtre=clients" class="filter-btn <?= $filtre === 'clients' ? 'active' : '' ?>">Clients</a>
-        <a href="admin.php?filtre=staff"   class="filter-btn <?= $filtre === 'staff'   ? 'active' : '' ?>">Staff</a>
-        <a href="admin.php?filtre=bloques" class="filter-btn <?= $filtre === 'bloques' ? 'active' : '' ?>">Bloqués</a>
+        <a href="admin.php?filtre=tous"    class="filter-btn <?= $filtre==='tous'    ? 'active':'' ?>">Tous (<?= count(get_tous_utilisateurs()) ?>)</a>
+        <a href="admin.php?filtre=clients" class="filter-btn <?= $filtre==='clients' ? 'active':'' ?>">Clients</a>
+        <a href="admin.php?filtre=staff"   class="filter-btn <?= $filtre==='staff'   ? 'active':'' ?>">Staff</a>
+        <a href="admin.php?filtre=bloques" class="filter-btn <?= $filtre==='bloques' ? 'active':'' ?>">Bloqués</a>
     </div>
 
-    <!-- Tableau -->
+    <!-- Tableau utilisateurs -->
     <div class="table-wrapper">
-    <table>
+    <table id="table-utilisateurs">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom / Prénom</th>
-                <th>Email</th>
-                <th>Rôle</th>
-                <th>Statut</th>
-                <th>Remise</th>
-                <th>Points</th>
-                <th>Inscription</th>
-                <th>Actions</th>
-            </tr>
+            <tr><th>ID</th><th>Nom / Prénom</th><th>Email</th><th>Rôle</th><th>Statut</th><th>Remise</th><th>Points</th><th>Inscription</th><th>Actions</th></tr>
         </thead>
         <tbody>
         <?php foreach ($tous_utilisateurs as $u): ?>
-            <tr class="<?= $u['statut'] === 'bloque' ? 'row-bloque' : '' ?>">
+            <tr id="row-user-<?= $u['id'] ?>" class="<?= $u['statut'] === 'bloque' ? 'row-bloque' : '' ?>">
                 <td><?= $u['id'] ?></td>
                 <td><strong><?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></strong></td>
                 <td><?= htmlspecialchars($u['login']) ?></td>
@@ -176,7 +120,7 @@ $nb_commandes = count(get_toutes_commandes());
                         <input type="hidden" name="action" value="changer_statut">
                         <select name="nouveau_statut" onchange="this.form.submit()" class="select-statut select-statut-<?= $u['statut'] ?>">
                             <?php foreach ($statut_options as $opt): ?>
-                                <option value="<?= $opt ?>" <?= $u['statut'] === $opt ? 'selected' : '' ?>><?= ucfirst($opt) ?></option>
+                                <option value="<?= $opt ?>" <?= $u['statut']===$opt ? 'selected':'' ?>><?= ucfirst($opt) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </form>
@@ -185,31 +129,35 @@ $nb_commandes = count(get_toutes_commandes());
                     <form method="post" action="admin.php" class="form-inline">
                         <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                         <input type="hidden" name="action" value="changer_remise">
-                        <input type="number" name="remise" value="<?= $u['remise'] ?? 0 ?>" min="0" max="50" class="input-remise">
+                        <input type="number" name="remise" value="<?= $u['remise'] ?? 0 ?>" min="0" max="50" class="input-remise" style="width:60px;padding:5px;">
                         <button type="submit" class="btn-ok">%</button>
                     </form>
                 </td>
                 <td><?= $u['points_fidelite'] ?? 0 ?> pts</td>
                 <td><?= htmlspecialchars($u['date_inscription']) ?></td>
                 <td class="td-actions">
+                    <a href="admin_profil.php?id=<?= $u['id'] ?>" class="btn-ok">Voir</a>
+
+    <!-- Boutons bloquer/débloquer ASYNCHRONES  -->
                     <?php if ($u['statut'] !== 'bloque'): ?>
-                        <form method="post" action="admin.php" style="display:inline;">
-                            <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
-                            <input type="hidden" name="action" value="bloquer">
-                            <button type="submit" class="btn-ok btn-danger">Bloquer</button>
-                        </form>
+                        <button class="btn-ok btn-danger"
+                                onclick="actionUtilisateur(<?= $u['id'] ?>, 'bloquer', this)"
+                                style="background:#c0392b;">
+                            Bloquer
+                        </button>
                     <?php else: ?>
-                        <form method="post" action="admin.php" style="display:inline;">
-                            <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
-                            <input type="hidden" name="action" value="activer">
-                            <button type="submit" class="btn-ok btn-success">Débloquer</button>
-                        </form>
+                        <button class="btn-ok btn-success"
+                                onclick="actionUtilisateur(<?= $u['id'] ?>, 'activer', this)"
+                                style="background:#27ae60;">
+                            Débloquer
+                        </button>
                     <?php endif; ?>
+
                     <?php $moi = get_utilisateur_connecte(); if ($u['id'] !== $moi['id']): ?>
                         <form method="post" action="admin.php" style="display:inline;" onsubmit="return confirm('Supprimer ce compte ?')">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="hidden" name="action" value="supprimer">
-                            <button type="submit" class="btn-ok btn-danger">✕</button>
+                            <button type="submit" class="btn-ok btn-danger" style="background:#c0392b;">✕</button>
                         </form>
                     <?php endif; ?>
                 </td>
@@ -220,10 +168,63 @@ $nb_commandes = count(get_toutes_commandes());
     </div>
 </main>
 
-<footer>
-    <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p>
-</footer>
+<!-- Script JS pour les actions asynchrones -->
+<script>
+// Phase 3 — Bloquer/Débloquer un utilisateur en asynchrone (sans rechargement)
+function actionUtilisateur(userId, action, bouton) {
+    const labels = { bloquer: 'Bloquer', activer: 'Débloquer' };
+    if (!confirm(`Voulez-vous ${labels[action].toLowerCase()} cet utilisateur ?`)) return;
+
+    // Désactiver le bouton pendant la requête
+    bouton.disabled = true;
+    bouton.textContent = '⏳';
+
+    fetch('api_admin.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: action, user_id: userId })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.succes) {
+            afficherMessageAdmin(data.message, 'succes');
+
+            // Mettre à jour la ligne sans recharger
+            const row = document.getElementById('row-user-' + userId);
+            if (row) {
+                if (data.nouveau_statut === 'bloque') {
+                    row.classList.add('row-bloque');
+                    // Remplacer le bouton Bloquer par Débloquer
+                    bouton.textContent   = 'Débloquer';
+                    bouton.style.background = '#27ae60';
+                    bouton.setAttribute('onclick', `actionUtilisateur(${userId}, 'activer', this)`);
+                } else {
+                    row.classList.remove('row-bloque');
+                    bouton.textContent   = 'Bloquer';
+                    bouton.style.background = '#c0392b';
+                    bouton.setAttribute('onclick', `actionUtilisateur(${userId}, 'bloquer', this)`);
+                }
+            }
+        } else {
+            afficherMessageAdmin(data.message || 'Erreur.', 'erreur');
+        }
+        bouton.disabled = false;
+    })
+    .catch(() => {
+        afficherMessageAdmin('Erreur de connexion au serveur.', 'erreur');
+        bouton.disabled = false;
+        bouton.textContent = labels[action];
+    });
+}
+
+function afficherMessageAdmin(message, type) {
+    const zone = document.getElementById('message-admin');
+    zone.innerHTML = `<p class="message-${type}">${message}</p>`;
+    // Faire disparaître après 4 secondes
+    setTimeout(() => { zone.innerHTML = ''; }, 4000);
+}
+</script>
+
+<footer><p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p></footer>
 </body>
 </html>
-
-
