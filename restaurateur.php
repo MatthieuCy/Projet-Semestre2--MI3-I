@@ -53,9 +53,9 @@ $liste_livraison   = array_values(get_commandes_par_statut('en_livraison'));
 $livreurs_libres   = array_values(get_livreurs_disponibles());
 
 $type_labels = [
-    'livraison' => '🛵 Livraison',
-    'emporter'  => '🏃 À emporter',
-    'sur_place' => '🪑 Sur place',
+    'livraison' => ' Livraison',
+    'emporter'  => ' À emporter',
+    'sur_place' => ' Sur place',
 ];
 ?>
 <!DOCTYPE html>
@@ -64,13 +64,12 @@ $type_labels = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interface Cuisine - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
 
 <main class="container">
-    <h1>Gestion des Commandes 🍕</h1>
+    <h1>Gestion des Commandes </h1>
 
     <?php if ($message_info !== ""): ?>
         <p class="message-succes"><?= htmlspecialchars($message_info) ?></p>
@@ -80,7 +79,7 @@ $type_labels = [
 
         <!-- COLONNE EN ATTENTE -->
         <div class="kanban-col">
-            <h3 class="kanban-titre kanban-attente">⏳ En attente (<?= count($liste_attente) ?>)</h3>
+            <h3 class="kanban-titre kanban-attente"> En attente (<?= count($liste_attente) ?>)</h3>
             <?php if (empty($liste_attente)): ?>
                 <p class="kanban-vide">Aucune commande en attente.</p>
             <?php endif; ?>
@@ -93,7 +92,7 @@ $type_labels = [
                         <span class="badge-type"><?= $type_labels[$c['type'] ?? ''] ?? $c['type'] ?></span>
                     </div>
                     <p><strong>Client :</strong> <?= htmlspecialchars($client ? $client['prenom'].' '.$client['nom'] : 'Inconnu') ?></p>
-                    <p class="commande-heure">⏰ <?= date('H:i', strtotime($c['date_commande'])) ?></p>
+                    <p class="commande-heure"> <?= date('H:i', strtotime($c['date_commande'])) ?></p>
                     <ul class="commande-articles">
                         <?php foreach ($c['articles'] as $art): ?>
                             <li><?= $art['quantite'] ?>× <?= htmlspecialchars($art['nom']) ?></li>
@@ -103,7 +102,7 @@ $type_labels = [
                     <form method="post" action="restaurateur.php">
                         <input type="hidden" name="commande_id" value="<?= $c['id'] ?>">
                         <input type="hidden" name="action" value="lancer">
-                        <button type="submit" class="btn-main btn-preparer">👨‍🍳 Lancer la préparation</button>
+                        <button type="submit" class="btn-main btn-preparer"> Lancer la préparation</button>
                     </form>
                 </article>
             <?php endforeach; ?>
@@ -111,7 +110,7 @@ $type_labels = [
 
         <!-- COLONNE EN PRÉPARATION -->
         <div class="kanban-col">
-            <h3 class="kanban-titre kanban-preparation">👨‍🍳 En cuisine (<?= count($liste_preparation) ?>)</h3>
+            <h3 class="kanban-titre kanban-preparation"> En cuisine (<?= count($liste_preparation) ?>)</h3>
             <?php if (empty($liste_preparation)): ?>
                 <p class="kanban-vide">Aucune commande en préparation.</p>
             <?php endif; ?>
@@ -142,10 +141,10 @@ $type_labels = [
                                 <?php endforeach; ?>
                             </select>
                             <?php if (empty($livreurs_libres)): ?>
-                                <p class="message-erreur">⚠️ Aucun livreur disponible.</p>
+                                <p class="message-erreur"> Aucun livreur disponible.</p>
                             <?php endif; ?>
                         <?php endif; ?>
-                        <button type="submit" class="btn-main btn-success">✅ Prêt !</button>
+                        <button type="submit" class="btn-main btn-success"> Prêt !</button>
                     </form>
                 </article>
             <?php endforeach; ?>
@@ -153,7 +152,7 @@ $type_labels = [
 
         <!-- COLONNE EN LIVRAISON -->
         <div class="kanban-col">
-            <h3 class="kanban-titre kanban-livraison">🛵 En livraison (<?= count($liste_livraison) ?>)</h3>
+            <h3 class="kanban-titre kanban-livraison"> En livraison (<?= count($liste_livraison) ?>)</h3>
             <?php if (empty($liste_livraison)): ?>
                 <p class="kanban-vide">Aucune commande en livraison.</p>
             <?php endif; ?>
@@ -163,11 +162,11 @@ $type_labels = [
                 <article class="commande commande-livraison">
                     <div class="commande-header">
                         <h4>Commande #<?= $c['id'] ?></h4>
-                        <span class="badge-type">🛵 Livraison</span>
+                        <span class="badge-type"> Livraison</span>
                     </div>
                     <p><strong>Livreur :</strong> <?= htmlspecialchars($livreur ? $livreur['prenom'].' '.$livreur['nom'] : 'Inconnu') ?></p>
-                    <p><strong>📍 Adresse :</strong> <?= htmlspecialchars($c['adresse_livraison']) ?></p>
-                    <p class="commande-heure">⏰ Parti à <?= date('H:i', strtotime($c['date_commande'])) ?></p>
+                    <p><strong> Adresse :</strong> <?= htmlspecialchars($c['adresse_livraison']) ?></p>
+                    <p class="commande-heure"> Parti à <?= date('H:i', strtotime($c['date_commande'])) ?></p>
                 </article>
             <?php endforeach; ?>
         </div>
