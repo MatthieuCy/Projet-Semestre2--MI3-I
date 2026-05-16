@@ -17,11 +17,11 @@ $commandes = array_values($commandes_brutes);
 usort($commandes, fn($a, $b) => strcmp($b['date_commande'], $a['date_commande']));
 
 $statut_labels = [
-    'en_attente'     => '⏳ En attente',
-    'en_preparation' => '👨‍🍳 En préparation',
-    'en_livraison'   => '🛵 En livraison',
-    'livree'         => '✅ Livrée',
-    'annulee'        => '❌ Annulée',
+    'en_attente'     => ' En attente',
+    'en_preparation' => ' En préparation',
+    'en_livraison'   => ' En livraison',
+    'livree'         => ' Livrée',
+    'annulee'        => ' Annulée',
 ];
 $statut_classes = [
     'en_attente'     => 'status-wait',
@@ -40,7 +40,6 @@ $points = $u['points_fidelite'] ?? 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Profil - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
@@ -54,35 +53,31 @@ $points = $u['points_fidelite'] ?? 0;
     <div class="profile-grid">
 
         <!-- Infos personnelles -->
-        <aside class="profile-card">
-            <h3>Mes Informations ✎</h3>
-            <?php
-            $champs = [
-                'Nom'       => $u['nom'],
-                'Prénom'    => $u['prenom'],
-                'Email'     => $u['login'],
-                'Téléphone' => $u['telephone'] ?: 'Non renseigné',
-                'Adresse'   => $u['adresse']   ?: 'Non renseignée',
-                'Détails'   => $u['details']   ?: 'Aucun',
-            ];
-            foreach ($champs as $label => $valeur): ?>
-       <div class="info-item" data-champ="<?= $cle ?>">
-                <div>
-                    <strong><?= $info['label'] ?> :</strong>
-                    <span class="valeur-champ"><?= htmlspecialchars($info['val']) ?></span>
-                </div>
-                <span class="edit-icon" data-champ="<?= $cle ?>" title="Modifier">✎</span>
+      <aside class="profile-card">
+        <h3>Mes Informations</h3>
+        <?php
+        $champs = [
+              'nom'       => ['label'=>'Nom',      'val'=>$u['nom']],
+              'prenom'    => ['label'=>'Prénom',    'val'=>$u['prenom']],
+              'telephone' => ['label'=>'Téléphone', 'val'=>$u['telephone'] ?: 'Non renseigné'],
+              'adresse'   => ['label'=>'Adresse',   'val'=>$u['adresse']   ?: 'Non renseignée'],
+              'details'   => ['label'=>'Détails',   'val'=>$u['details']   ?: 'Aucun'],
+        ];
+        foreach ($champs as $cle => $info): ?>
+        <div class="info-item" data-champ="<?= $cle ?>">
+            <div>
+                <strong><?= $info['label'] ?> :</strong>
+                <span class="valeur-champ"><?= htmlspecialchars($info['val']) ?></span>
             </div>
-            <?php endforeach; ?>
-            <p class="note-phase"><em> Cliquez sur ✎ pour modifier (sauvegarde automatique)</em></p>
-        </aside>
-            <?php endforeach; ?>
-            <p class="note-phase"><em>✏️ La modification sera effective en Phase 3.</em></p>
-        </aside>
+            <span class="edit-icon" data-champ="<?= $cle ?>" title="Modifier">✎</span>
+        </div>
+        <?php endforeach; ?>
+        <p class="note-phase">Cliquez sur ✎ pour modifier (sauvegarde automatique)</p>
+       </aside>
 
         <!-- Points fidélité -->
         <section class="profile-card loyalty">
-            <h3>Points Fidélité 🏆</h3>
+            <h3>Points Fidélité </h3>
             <div class="points-box">
                 <strong><?= $points ?></strong> points cumulés
             </div>
@@ -136,7 +131,7 @@ $points = $u['points_fidelite'] ?? 0;
                             ?>
                                 <a href="notation.php?commande_id=<?= $cmd['id'] ?>" class="btn-ok">Noter</a>
                             <?php elseif ($note !== null): ?>
-                                ⭐ <?= $note ?>/5
+                                 <?= $note ?>/5
                             <?php else: ?>
                                 —
                             <?php endif; ?>
@@ -150,9 +145,7 @@ $points = $u['points_fidelite'] ?? 0;
 
     </div>
 
-    <div style="text-align:center; margin-top:30px;">
         <a href="carte.php" class="btn-main">🍕 Commander maintenant</a>
-    </div>
 </main>
 
 <footer>
@@ -162,8 +155,3 @@ $points = $u['points_fidelite'] ?? 0;
 </html>
 
 
-<footer>
-    <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p>
-</footer>
-</body>
-</html>
