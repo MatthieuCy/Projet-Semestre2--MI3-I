@@ -69,9 +69,9 @@ if ($statut === 'accepted' && $control_recu === $control_verif) {
 <head>
     <meta charset="UTF-8">
     <title>Confirmation de commande</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
     <main class="container">
         <div class="form-container">
             <?php if ($paiement_valide): ?>
