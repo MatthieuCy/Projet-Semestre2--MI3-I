@@ -14,7 +14,7 @@ if ($filtre_reg === 'sans_gluten')  $plats_affiches = array_filter($plats_affich
 if ($filtre_reg === 'sans_lactose') $plats_affiches = array_filter($plats_affiches, fn($p) => $p['sans_lactose'] === true);
 if ($filtre_reg === 'vegetarien')   $plats_affiches = array_filter($plats_affiches, fn($p) => $p['vegetarien'] === true);
 
-$categories = ['toutes'=>'Toutes','pizza'=>'🍕 Pizzas','entree'=>'🥗 Entrées','dessert'=>'🍮 Desserts','boisson'=>'🥤 Boissons'];
+$categories = ['toutes'=>'Toutes','pizza'=>' Pizzas','entree'=>' Entrées','dessert'=>' Desserts','boisson'=>' Boissons'];
 $menus = get_tous_menus();
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,6 @@ $menus = get_tous_menus();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Carte - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
@@ -92,7 +91,7 @@ $menus = get_tous_menus();
                 <h3><?= htmlspecialchars($plat['nom']) ?></h3>
                 <p><?= htmlspecialchars($plat['description']) ?></p>
                 <?php if (!empty($plat['allergenes'])): ?>
-                    <p class="allergenes">⚠️ <?= implode(', ', $plat['allergenes']) ?></p>
+                    <p class="allergenes"> <?= implode(', ', $plat['allergenes']) ?></p>
                 <?php endif; ?>
                 <span class="price"><?= number_format($plat['prix'], 2) ?> €</span>
                 <?php if (get_role_connecte() === 'client' || !est_connecte()): ?>
@@ -118,14 +117,14 @@ $menus = get_tous_menus();
                     <h3><?= htmlspecialchars($menu['nom']) ?></h3>
                     <p><?= htmlspecialchars($menu['description']) ?></p>
                     <?php if ($menu['creneaux'] === 'midi'): ?>
-                        <p class="allergenes">🕐 Disponible midi uniquement</p>
+                        <p class="allergenes"> Disponible midi uniquement</p>
                     <?php endif; ?>
                     <?php if ($menu['personnes_min'] > 1): ?>
-                        <p class="allergenes">👥 Min. <?= $menu['personnes_min'] ?> personnes</p>
+                        <p class="allergenes"> Min. <?= $menu['personnes_min'] ?> personnes</p>
                     <?php endif; ?>
                     <span class="price"><?= number_format($menu['prix_total'], 2) ?> €</span>
                     <?php if (get_role_connecte() === 'client' || !est_connecte()): ?>
-                        <a href="panier.php?action=ajouter&type=menu&id=<?= $menu['id'] ?>" class="btn-add">Ajouter au panier 🛒</a>
+                        <a href="panier.php?action=ajouter&type=menu&id=<?= $menu['id'] ?>" class="btn-add">Ajouter au panier </a>
                     <?php endif; ?>
                 </div>
             </article>
