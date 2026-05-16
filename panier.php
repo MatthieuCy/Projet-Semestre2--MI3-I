@@ -88,7 +88,6 @@ $id_nouvelle_commande = null;
 <head>
     <meta charset="UTF-8">
     <title>Mon Panier - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php 
@@ -104,7 +103,7 @@ $id_nouvelle_commande = null;
 
     <?php if ($commande_passee) { ?>
         <div class="form-container">
-            <h2>✅ Commande confirmée !</h2>
+            <h2> Commande confirmée !</h2>
             <p>Commande n°<strong><?php echo $id_nouvelle_commande; ?></strong> enregistrée.</p>
             <a href="profil.php" class="btn-main">Suivre ma commande</a>
         </div>
@@ -156,7 +155,7 @@ $id_nouvelle_commande = null;
         </tfoot>
     </table>
 
-    <a href="panier.php?action=vider" class="btn-ok">🗑️ Vider le panier</a>
+    <a href="panier.php?action=vider" class="btn-ok"> Vider le panier</a>
 
     <form method="post" action="paiement.php" class="form-container">
     <h3>Finaliser ma commande</h3>
@@ -173,7 +172,7 @@ $id_nouvelle_commande = null;
         <input type="datetime-local" name="date_souhaitee">
     </div>
 
-    <button type="submit" class="btn-main">✅ Aller au paiement sécurisé CYBank</button>
+    <button type="submit" class="btn-main"> Aller au paiement sécurisé CYBank</button>
     </form>
     <?php } ?>
 </main>
