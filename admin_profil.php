@@ -23,7 +23,6 @@ $statut_labels = [
 <head>
     <meta charset="UTF-8">
     <title>Profil Utilisateur - Admin</title>
-    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <?php $base = '../';
