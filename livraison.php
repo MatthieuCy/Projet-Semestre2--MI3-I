@@ -47,7 +47,6 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ma Livraison - Pizza Nova</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php $base = ''; require_once(__DIR__ . '/includes/nav.php'); ?>
@@ -57,7 +56,7 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
     <!-- En-tête livreur -->
     <section class="entete-livraison">
         <h2>Espace Livreur</h2>
-        <p>Bonjour, <strong><?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></strong> 👋</p>
+        <p>Bonjour, <strong><?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></strong> </p>
     </section>
 
     <?php if ($message): ?>
@@ -67,26 +66,26 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
     <?php if (!$commande_en_cours): ?>
         <section class="entete-livraison" style="margin-top:20px;">
             <p>Aucune livraison assignée pour le moment.</p>
-            <p>En attente d'une nouvelle course... 🛵</p>
+            <p>En attente d'une nouvelle course... </p>
         </section>
     <?php else: ?>
         <section class="infos-client-livraison">
             <div class="carte-livraison">
-                <h3>🏠 Destination — Course n°<?= $commande_en_cours['id'] ?></h3>
+                <h3> Destination — Course n°<?= $commande_en_cours['id'] ?></h3>
                 <p><strong>Client :</strong>
                     <?= $client ? htmlspecialchars($client['prenom'].' '.$client['nom']) : 'Inconnu' ?>
                 </p>
-                <p><strong>📞 Tél :</strong>
+                <p><strong> Tél :</strong>
                     <a href="tel:<?= htmlspecialchars($commande_en_cours['telephone_client']) ?>">
                         <?= htmlspecialchars($commande_en_cours['telephone_client']) ?>
                     </a>
                 </p>
-                <p><strong>📍 Adresse :</strong> <?= htmlspecialchars($commande_en_cours['adresse_livraison']) ?></p>
-                <p><strong>🔑 Détails :</strong> <?= htmlspecialchars($commande_en_cours['details_livraison'] ?: 'Aucun') ?></p>
+                <p><strong> Adresse :</strong> <?= htmlspecialchars($commande_en_cours['adresse_livraison']) ?></p>
+                <p><strong> Détails :</strong> <?= htmlspecialchars($commande_en_cours['details_livraison'] ?: 'Aucun') ?></p>
             </div>
 
             <div class="carte-livraison" style="margin-top:15px;">
-                <h3>📦 Articles</h3>
+                <h3> Articles</h3>
                 <ul>
                     <?php foreach ($commande_en_cours['articles'] as $art): ?>
                         <li><?= $art['quantite'] ?>× <?= htmlspecialchars($art['nom']) ?></li>
@@ -94,25 +93,25 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
                 </ul>
                 <p><strong>Total :</strong> <?= number_format($commande_en_cours['total'], 2) ?> €</p>
                 <p><strong>Paiement :</strong>
-                    <?= $commande_en_cours['paiement_statut'] === 'paye' ? '✅ Déjà payé' : '⚠️ À encaisser' ?>
+                    <?= $commande_en_cours['paiement_statut'] === 'paye' ? ' Déjà payé' : ' À encaisser' ?>
                 </p>
             </div>
 
             <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($commande_en_cours['adresse_livraison']) ?>"
                target="_blank" class="btn-gps" style="display:block; text-align:center; margin:15px 0;">
-                🗺️ LANCER L'ITINÉRAIRE
+                 LANCER L'ITINÉRAIRE
             </a>
 
             <form method="post" action="livraison.php">
                 <input type="hidden" name="commande_id" value="<?= $commande_en_cours['id'] ?>">
                 <input type="hidden" name="action" value="livree">
-                <button type="submit" class="btn-valider-livraison">✅ MARQUER COMME LIVRÉE</button>
+                <button type="submit" class="btn-valider-livraison"> MARQUER COMME LIVRÉE</button>
             </form>
 
             <form method="post" action="livraison.php" style="margin-top:10px;">
                 <input type="hidden" name="commande_id" value="<?= $commande_en_cours['id'] ?>">
                 <input type="hidden" name="action" value="abandonnee">
-                <button type="submit" class="btn-valider-livraison btn-danger-livraison">❌ ADRESSE INTROUVABLE</button>
+                <button type="submit" class="btn-valider-livraison btn-danger-livraison">ADRESSE INTROUVABLE</button>
             </form>
         </section>
     <?php endif; ?>
