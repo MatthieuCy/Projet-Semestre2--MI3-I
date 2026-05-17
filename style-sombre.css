@@ -1,5 +1,4 @@
-/* ================================================ */
-   style-sombre.css — Mode Sombre Pizza Nova
+/* style-sombre.css — Mode Sombre Pizza Nova */
    
 
 /* VARIABLES -*/
@@ -53,6 +52,19 @@ h2 {
     text-align:    center;
     font-style:    italic;
     color:         var(--terracotta);
+}
+
+/* VITO */
+.hero-container {
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    gap:             30px;
+    padding:         40px;
+}
+
+.hero-image img {
+    width: 150px;
 }
 
 /* --- NAVIGATION --- */
