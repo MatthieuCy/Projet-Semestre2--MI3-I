@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // 3. VALIDATION FORMULAIRE CONNEXION (côté client)
-=
 
 function initValidationConnexion() {
     const form = document.getElementById('form-connexion');
