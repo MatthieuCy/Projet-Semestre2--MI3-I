@@ -5,7 +5,7 @@ $u    = get_utilisateur_connecte();
 $role = $u ? $u['role'] : null;
 ?>
 <link id="theme-css" rel="stylesheet" href="style.css">
-<script src="scripts/main.js" defer></script>
+<script src="main.js" defer></script>
 <header>
     <nav>
         <div class="logo"> Pizza Nova</div>
