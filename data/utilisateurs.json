@@ -151,5 +151,21 @@
     "statut": "actif",
     "points_fidelite": 0,
     "remise": 0
-  }
+  },
+{
+  "id": 10,
+  "login": "livreur2@pizza.fr",
+  "mot_de_passe": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+  "role": "livreur",
+  "nom": "Nova",
+  "prenom": "Vito",
+  "telephone": "0633333333",
+  "adresse": "4 Rue du Prieuré, 95000 Cergy",
+  "details": "",
+  "date_inscription": "2024-09-01",
+  "derniere_connexion": "2025-04-01",
+  "statut": "actif",
+  "points_fidelite": 0,
+  "remise": 0
+}
 ]
