@@ -23,7 +23,8 @@ $montant_formatte = number_format($total_remise, 2, '.', '');
 // CYBank 
 $vendeur = "MI-3_I"; 
 $transaction = substr(md5(uniqid(mt_rand(), true)), 0, 15); // Id unique
-$url_retour = "http://localhost:8000/retour_paiement.php";
+$protocole  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$url_retour = $protocole . '://' . $_SERVER['HTTP_HOST'] . '/retour_paiement.php';
 
 // Calcul de la valeur de contrôle (Hash MD5) 
 $api_key = getAPIKey($vendeur); 
