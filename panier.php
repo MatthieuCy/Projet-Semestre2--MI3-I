@@ -91,7 +91,7 @@ $id_nouvelle_commande = null;
 </head>
 <body>
 <?php 
-    $base = '../';
+    $base = '';
     require_once(__DIR__ . '/includes/nav.php'); 
 ?>
 <main class="container">
