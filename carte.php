@@ -14,6 +14,8 @@ if ($categorie !== 'toutes') {
 if ($filtre_reg === 'sans_gluten')  $plats_affiches = array_filter($plats_affiches, fn($p) => $p['sans_gluten'] === true);
 if ($filtre_reg === 'sans_lactose') $plats_affiches = array_filter($plats_affiches, fn($p) => $p['sans_lactose'] === true);
 if ($filtre_reg === 'vegetarien')   $plats_affiches = array_filter($plats_affiches, fn($p) => $p['vegetarien'] === true);
+if ($filtre_reg === 'vegan')        $plats_affiches = array_filter($plats_affiches, fn($p) => $p['vegan'] === true);
+if ($filtre_reg === 'halal')        $plats_affiches = array_filter($plats_affiches, fn($p) => $p['halal'] === true);
 if ($recherche !== '') {
     $plats_affiches = array_filter($plats_affiches, fn($p) => stripos($p['nom'], $recherche) !== false || stripos($p['description'], $recherche) !== false);
 }
@@ -61,6 +63,12 @@ $menus = get_tous_menus();
                 <a href="carte.php?cat=<?= $categorie ?>&regime=vegetarien"
                    class="filter-btn <?= $filtre_reg === 'vegetarien' ? 'active' : '' ?>"
                    data-regime="vegetarien">Végétarien</a>
+                <a href="carte.php?cat=<?= $categorie ?>&regime=vegan"
+                   class="filter-btn <?= $filtre_reg === 'vegan' ? 'active' : '' ?>"
+                   data-regime="vegan">Vegan</a>
+                <a href="carte.php?cat=<?= $categorie ?>&regime=halal"
+                   class="filter-btn <?= $filtre_reg === 'halal' ? 'active' : '' ?>"
+                   data-regime="halal">Halal</a>
                 <?php if ($filtre_reg): ?>
                     <a href="carte.php?cat=<?= $categorie ?>" class="filter-btn">✕ Effacer</a>
                 <?php endif; ?>

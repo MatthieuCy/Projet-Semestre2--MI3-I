@@ -22,6 +22,10 @@ if ($regime === 'sans_gluten') {
     $plats = array_filter($plats, fn($p) => $p['sans_lactose'] === true);
 } elseif ($regime === 'vegetarien') {
     $plats = array_filter($plats, fn($p) => $p['vegetarien'] === true);
+} elseif ($regime === 'vegan') {
+    $plats = array_filter($plats, fn($p) => $p['vegan'] === true);
+} elseif ($regime === 'halal') {
+    $plats = array_filter($plats, fn($p) => $p['halal'] === true);
 }
 
 echo json_encode(array_values($plats), JSON_UNESCAPED_UNICODE);
