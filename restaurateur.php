@@ -99,11 +99,11 @@ $type_labels = [
                         <?php endforeach; ?>
                     </ul>
                     <p class="commande-total"><strong><?= number_format($c['total'], 2) ?> €</strong></p>
-                    <form method="post" action="restaurateur.php">
-                        <input type="hidden" name="commande_id" value="<?= $c['id'] ?>">
-                        <input type="hidden" name="action" value="lancer">
-                        <button type="submit" class="btn-main btn-preparer"> Lancer la préparation</button>
-                    </form>
+                    <!-- Bouton lancer ASYNCHRONE -->
+                    <button class="btn-main btn-preparer"
+                            onclick="changerStatut(<?= $c['id'] ?>, 'lancer', this)">
+                         Lancer la préparation
+                    </button>
                 </article>
             <?php endforeach; ?>
         </div>
@@ -129,23 +129,23 @@ $type_labels = [
                         <?php endforeach; ?>
                     </ul>
                     <p class="commande-total"><strong><?= number_format($c['total'], 2) ?> €</strong></p>
-                    <form method="post" action="restaurateur.php">
-                        <input type="hidden" name="commande_id" value="<?= $c['id'] ?>">
-                        <input type="hidden" name="action" value="pret">
-                        <?php if ($c['type'] === 'livraison'): ?>
-                            <label class="label-select"><strong>Affecter un livreur :</strong></label>
-                            <select name="livreur_id" required class="select-statut">
-                                <option value="">-- Choisir un livreur --</option>
-                                <?php foreach ($livreurs_libres as $l): ?>
-                                    <option value="<?= $l['id'] ?>"><?= htmlspecialchars($l['prenom'].' '.$l['nom']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <?php if (empty($livreurs_libres)): ?>
-                                <p class="message-erreur"> Aucun livreur disponible.</p>
-                            <?php endif; ?>
+                    <!-- Bouton prêt ASYNCHRONE -->
+                    <?php if ($c['type'] === 'livraison'): ?>
+                        <label class="label-select"><strong>Affecter un livreur :</strong></label>
+                        <select id="livreur-<?= $c['id'] ?>" class="select-statut">
+                            <option value="">-- Choisir un livreur --</option>
+                            <?php foreach ($livreurs_libres as $l): ?>
+                                <option value="<?= $l['id'] ?>"><?= htmlspecialchars($l['prenom'].' '.$l['nom']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (empty($livreurs_libres)): ?>
+                            <p class="message-erreur"> Aucun livreur disponible.</p>
                         <?php endif; ?>
-                        <button type="submit" class="btn-main btn-success"> Prêt !</button>
-                    </form>
+                    <?php endif; ?>
+                    <button class="btn-main btn-success"
+                            onclick="changerStatut(<?= $c['id'] ?>, 'pret', this, <?= $c['type'] === 'livraison' ? "'livreur-{$c['id']}'" : 'null' ?>)">
+                         Prêt !
+                    </button>
                 </article>
             <?php endforeach; ?>
         </div>
@@ -177,5 +177,59 @@ $type_labels = [
 <footer>
     <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p>
 </footer>
+<!-- Script JS pour les actions asynchrones -->
+<script>
+function changerStatut(commandeId, action, bouton, selectId = null) {
+    const body = { commande_id: commandeId, action: action };
+
+    if (selectId) {
+        const livreurId = document.getElementById(selectId)?.value;
+        if (!livreurId) {
+            alert('Veuillez sélectionner un livreur.');
+            return;
+        }
+        body.livreur_id = parseInt(livreurId);
+    }
+
+    bouton.disabled    = true;
+    bouton.textContent = '⏳';
+
+    fetch('api_restaurateur.php', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(body)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.succes) {
+            afficherNotification('✅ ' + data.message, 'succes');
+            setTimeout(() => location.reload(), 1500);
+        } else {
+            afficherNotification('❌ ' + data.message, 'erreur');
+            bouton.disabled    = false;
+            bouton.textContent = action === 'lancer' ? '🍳 Lancer la préparation' : '✅ Prêt !';
+        }
+    })
+    .catch(() => {
+        afficherNotification('❌ Erreur réseau.', 'erreur');
+        bouton.disabled    = false;
+    });
+}
+
+function afficherNotification(message, type) {
+    const notif = document.createElement('div');
+    notif.textContent = message;
+    notif.style.cssText = `
+        position:fixed; top:20px; right:20px; z-index:9999;
+        padding:12px 20px; border-radius:8px; font-weight:bold;
+        background:${type === 'succes' ? '#d4edda' : '#f8d7da'};
+        color:${type === 'succes' ? '#155724' : '#721c24'};
+        box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    `;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+}
+</script>
+
 </body>
 </html>
