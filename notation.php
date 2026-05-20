@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Noter ma commande - Pizza Nova</title>
 </head>
 <body>
-<?php $base = '../';
+<?php $base = '';
 require_once(__DIR__ . '/includes/nav.php'); ?>
 <main class="container">
     <h2>Votre avis nous intéresse !</h2>
