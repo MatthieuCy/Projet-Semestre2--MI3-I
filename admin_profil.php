@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/session.php';
-require_once '../includes/donnees.php';
+require_once __DIR__ . '/includes/session.php';
+require_once __DIR__ . '/includes/donnees.php';
 exiger_role('admin');
 
 $id = (int)($_GET['id'] ?? 0);
@@ -25,8 +25,8 @@ $statut_labels = [
     <title>Profil Utilisateur - Admin</title>
 </head>
 <body>
-<?php $base = '../';
-require_once '../includes/nav.php'; ?>
+<?php $base = '';
+require_once __DIR__ . '/includes/nav.php'; ?>
 <main class="profile-container">
     <h1>Profil de <?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></h1>
     <a href="admin.php" class="btn-ok" style="margin-bottom:20px; display:inline-block;">← Retour</a>
