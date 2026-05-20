@@ -132,6 +132,8 @@ $points = $u['points_fidelite'] ?? 0;
                                 <a href="notation.php?commande_id=<?= $cmd['id'] ?>" class="btn-ok">Noter</a>
                             <?php elseif ($note !== null): ?>
                                  <?= $note ?>/5
+                            <?php elseif ($cmd['statut'] === 'en_attente'): ?>
+                                <a href="modifier_commande.php?id=<?= $cmd['id'] ?>" class="btn-ok">✏️ Modifier</a>
                             <?php else: ?>
                                 —
                             <?php endif; ?>
