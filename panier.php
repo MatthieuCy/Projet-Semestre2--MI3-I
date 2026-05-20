@@ -63,6 +63,17 @@ if ($action === 'retirer') {
     unset($_SESSION['panier'][$cle]);
 }
 
+if ($action === 'diminuer') {
+    $cle = $_GET['cle'] ?? '';
+    if (isset($_SESSION['panier'][$cle])) {
+        $_SESSION['panier'][$cle]['quantite']--;
+        // Si qté ==  à 0: on retire l'article
+        if ($_SESSION['panier'][$cle]['quantite'] <= 0) {
+            unset($_SESSION['panier'][$cle]);
+        }
+    }
+}
+
 if ($action === 'vider') {
     $_SESSION['panier'] = array();
 }
@@ -129,7 +140,12 @@ $id_nouvelle_commande = null;
             <tr>
                 <td><?php echo htmlspecialchars($item['nom']); ?> <small>(<?php echo $item['type']; ?>)</small></td>
                 <td><?php echo number_format($item['prix'], 2); ?> €</td>
-                <td><?php echo $item['quantite']; ?></td>
+                // Gestion de la diminution de la quantité d'un article dans le panier
+                <td style="white-space:nowrap;">
+                   <a href="panier.php?action=diminuer&cle=<?php echo urlencode($cle); ?>" class="btn-ok" style="padding:2px 8px;">−</a>
+                      <?php echo $item['quantite']; ?>
+                    <a href="panier.php?action=ajouter&type=<?php echo $item['type']; ?>&id=<?php echo $item['id']; ?>" class="btn-ok" style="padding:2px 8px;">+</a>
+                </td>
                 <td><?php echo number_format($item['prix'] * $item['quantite'], 2); ?> €</td>
                 <td>
                     <a href="panier.php?action=retirer&cle=<?php echo urlencode($cle); ?>" class="btn-ok">✕</a>
