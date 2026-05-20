@@ -59,6 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once(__DIR__ . '/includes/nav.php'); ?>
 <main>
     <section class="form-container">
+
+        <?php if (($_GET['bloque'] ?? '') === '1'): ?>
+    <p class="message-erreur">Votre compte a été bloqué. Contactez l'administrateur.</p>
+<?php endif; ?>
+
         <h2>Connexion à votre espace</h2>
 
         <?php if ($erreur): ?>
