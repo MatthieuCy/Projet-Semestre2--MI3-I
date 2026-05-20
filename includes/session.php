@@ -25,6 +25,15 @@ function exiger_connexion(): void {
         header('Location: connexion.php');
         exit;
     }
+    //  vérif à chaque requête si l'utilisatuer a été bloqué
+    require_once __DIR__ . '/donnees.php';
+    $u = get_utilisateur_par_id($_SESSION['utilisateur_id']);
+    if (!$u || $u['statut'] === 'bloque') {
+        $_SESSION = [];
+        session_destroy();
+        header('Location: connexion.php?bloque=1');
+        exit;
+    }
 }
 
 function exiger_role(string $role): void {
