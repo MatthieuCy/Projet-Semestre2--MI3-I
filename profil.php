@@ -127,7 +127,7 @@ $points = $u['points_fidelite'] ?? 0;
                         <td>
                             <?php
                             $note = $cmd['note_produits'] ?? null;
-                            if ($cmd['statut'] === 'livree' && $note === null):
+                            if ($cmd['statut'] === 'livree' && $note === null && ($cmd['type'] ?? '') === 'livraison'):
                             ?>
                                 <a href="notation.php?commande_id=<?= $cmd['id'] ?>" class="btn-ok">Noter</a>
                             <?php elseif ($note !== null): ?>
