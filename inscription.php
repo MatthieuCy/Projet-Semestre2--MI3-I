@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $nouvel_utilisateur = [
             'login'               => $donnees['email'],
-            'mot_de_passe_clair'  => $donnees['mdp'],
             'mot_de_passe'        => password_hash($donnees['mdp'], PASSWORD_DEFAULT),
             'role'                => 'client',
             'nom'                 => $donnees['nom'],
