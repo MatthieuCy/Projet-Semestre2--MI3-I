@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $utilisateur = get_utilisateur_par_login($login);
         // Vérification du mot de passe (stocké en clair pour la démo / hash en prod)
-        if ($utilisateur && ($mdp === $utilisateur['mot_de_passe_clair'])) {
+        if ($utilisateur && password_verify($mdp, $utilisateur['mot_de_passe'])) {
             if ($utilisateur['statut'] === 'bloque') {
                 $erreur = 'Ce compte est désactivé. Contactez l\'administrateur.';
             } else {
