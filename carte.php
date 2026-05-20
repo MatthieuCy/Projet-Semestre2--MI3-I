@@ -128,6 +128,14 @@ $menus = get_tous_menus();
                 <div class="pizza-info">
                     <h3><?= htmlspecialchars($menu['nom']) ?></h3>
                     <p><?= htmlspecialchars($menu['description']) ?></p>
+                    <?php
+                    $noms_plats = array_filter(array_map(function($pid) use ($tous_plats) {
+                        foreach ($tous_plats as $p) { if ($p['id'] === $pid) return $p['nom']; }
+                        return null;
+                    }, $menu['plats_ids'] ?? []));
+                    if (!empty($noms_plats)): ?>
+                        <p class="allergenes">🍽️ <?= htmlspecialchars(implode(', ', $noms_plats)) ?></p>
+                    <?php endif; ?>
                     <?php if ($menu['creneaux'] === 'midi'): ?>
                         <p class="allergenes"> Disponible midi uniquement</p>
                     <?php endif; ?>
