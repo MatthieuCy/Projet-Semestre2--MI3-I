@@ -45,16 +45,29 @@ if ($statut === 'accepted' && $control_recu === $control_verif) {
     }
 
     $nouvelle_commande = [
-        'client_id' => $u['id'],
-        'articles' => $articles,
-        'total' => (float)$montant,
-        'adresse_livraison' => $adresse_finale, 
-        'type' => $type_choisi,
-        'statut' => 'en_attente', 
-        'date_commande' => date('Y-m-d H:i:s'), 
-        'date_livraison_souhaitee' => $temp['date_souhaitee'], 
-        'paiement_statut' => 'paye' 
-    ];
+    'client_id'                => $u['id'],
+    'articles'                 => $articles,
+    'total'                    => (float)$montant,
+    'adresse_livraison'        => $adresse_finale,
+    'type'                     => $type_choisi,
+    'statut'                   => 'en_attente',
+    'date_commande'            => date('Y-m-d H:i:s'),
+    'date_livraison_souhaitee' => $temp['date_souhaitee'] ?? null, // Sécurisé au cas où la date est absente
+    'paiement_statut'          => 'paye',
+    'livreur_id'               => null,
+    'telephone_client'         => $u['telephone'] ?? '',
+    'details_livraison'        => $u['details'] ?? '',
+    'note_produits'            => null,
+    'note_livraison'           => null,
+    'commentaire'              => '',
+];
+   
+
+
+   
+   
+    
+    
 
     $commande_id     = ajouter_commande($nouvelle_commande);
     $_SESSION['panier']        = [];
