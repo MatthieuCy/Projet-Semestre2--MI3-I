@@ -262,11 +262,14 @@ function initTriCarte() {
             const prixB = parseFloat(b.querySelector('.price')?.textContent) || 0;
             const nomA  = a.querySelector('h3')?.textContent || '';
             const nomB  = b.querySelector('h3')?.textContent || '';
+            const popA  = parseInt(a.dataset.nbCommandes) || 0;
+            const popB  = parseInt(b.dataset.nbCommandes) || 0;
 
-            if (tri === 'prix-asc')  return prixA - prixB;
-            if (tri === 'prix-desc') return prixB - prixA;
-            if (tri === 'nom-asc')   return nomA.localeCompare(nomB, 'fr');
-            if (tri === 'nom-desc')  return nomB.localeCompare(nomA, 'fr');
+            if (tri === 'prix-asc')   return prixA - prixB;
+            if (tri === 'prix-desc')  return prixB - prixA;
+            if (tri === 'nom-asc')    return nomA.localeCompare(nomB, 'fr');
+            if (tri === 'nom-desc')   return nomB.localeCompare(nomA, 'fr');
+            if (tri === 'populaire')  return popB - popA;
             return 0;
         });
 

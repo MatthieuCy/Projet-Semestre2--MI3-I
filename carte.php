@@ -22,6 +22,16 @@ if ($recherche !== '') {
 
 $categories = ['toutes'=>'Toutes','pizza'=>' Pizzas','entree'=>' Entrées','dessert'=>' Desserts','boisson'=>' Boissons'];
 $menus = get_tous_menus();
+
+// Comptage des commandes par plat pour le tri "populaire"
+$comptage_plats = [];
+foreach (get_toutes_commandes() as $cmd) {
+    foreach ($cmd['articles'] ?? [] as $art) {
+        if ($art['type'] === 'plat') {
+            $comptage_plats[$art['id']] = ($comptage_plats[$art['id']] ?? 0) + ($art['quantite'] ?? 1);
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -85,6 +95,7 @@ $menus = get_tous_menus();
             <option value="prix-desc">Prix décroissant</option>
             <option value="nom-asc">Nom A → Z</option>
             <option value="nom-desc">Nom Z → A</option>
+            <option value="populaire">Les plus commandés</option>
         </select>
     </div>
 
@@ -94,7 +105,7 @@ $menus = get_tous_menus();
     <?php else: ?>
     <div id="grille-plats" class="grid-pizzas">
         <?php foreach ($plats_affiches as $plat): ?>
-        <article class="pizza-card">
+        <article class="pizza-card" data-nb-commandes="<?= $comptage_plats[$plat['id']] ?? 0 ?>">
             <img src="<?= htmlspecialchars($plat['image']) ?>"
                  alt="<?= htmlspecialchars($plat['nom']) ?>"
                  class="pizza-img"

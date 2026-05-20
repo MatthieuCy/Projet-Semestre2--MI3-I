@@ -10,6 +10,20 @@ $regime     = $_GET['regime'] ?? '';
 
 $plats = get_tous_plats();
 
+// Comptage des commandes par plat
+$comptage = [];
+foreach (get_toutes_commandes() as $cmd) {
+    foreach ($cmd['articles'] ?? [] as $art) {
+        if ($art['type'] === 'plat') {
+            $comptage[$art['id']] = ($comptage[$art['id']] ?? 0) + ($art['quantite'] ?? 1);
+        }
+    }
+}
+foreach ($plats as &$p) {
+    $p['nb_commandes'] = $comptage[$p['id']] ?? 0;
+}
+unset($p);
+
 // Filtrage catégorie
 if ($categorie !== 'toutes') {
     $plats = array_filter($plats, fn($p) => $p['categorie'] === $categorie);
