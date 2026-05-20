@@ -27,9 +27,11 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
             <h2>Une expérience artisanale unique.</h2>
             <div class="search-box">
                 <label for="rech">Rechercher :</label>
-                <input type="text" id="rech" name="fname" class="search-input"
-                       placeholder="Ex: Margherita...">
-                <a href="carte.php" class="btn-ok">Ok</a>
+                <form action="carte.php" method="get" style="display:flex;gap:8px;">
+                    <input type="text" id="rech" name="recherche" class="search-input"
+                           placeholder="Ex: Margherita...">
+                    <button type="submit" class="btn-ok">Ok</button>
+                </form>
             </div>
         </div>
     </div>

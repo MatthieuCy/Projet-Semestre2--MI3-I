@@ -3,8 +3,9 @@ require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
 
 $tous_plats = get_tous_plats();
-$categorie  = $_GET['cat']    ?? 'toutes';
-$filtre_reg = $_GET['regime'] ?? '';
+$categorie  = $_GET['cat']       ?? 'toutes';
+$filtre_reg = $_GET['regime']    ?? '';
+$recherche  = trim($_GET['recherche'] ?? '');
 
 $plats_affiches = $tous_plats;
 if ($categorie !== 'toutes') {
@@ -13,6 +14,9 @@ if ($categorie !== 'toutes') {
 if ($filtre_reg === 'sans_gluten')  $plats_affiches = array_filter($plats_affiches, fn($p) => $p['sans_gluten'] === true);
 if ($filtre_reg === 'sans_lactose') $plats_affiches = array_filter($plats_affiches, fn($p) => $p['sans_lactose'] === true);
 if ($filtre_reg === 'vegetarien')   $plats_affiches = array_filter($plats_affiches, fn($p) => $p['vegetarien'] === true);
+if ($recherche !== '') {
+    $plats_affiches = array_filter($plats_affiches, fn($p) => stripos($p['nom'], $recherche) !== false || stripos($p['description'], $recherche) !== false);
+}
 
 $categories = ['toutes'=>'Toutes','pizza'=>' Pizzas','entree'=>' Entrées','dessert'=>' Desserts','boisson'=>' Boissons'];
 $menus = get_tous_menus();
