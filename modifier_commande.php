@@ -90,7 +90,7 @@ foreach ($commande['articles'] as $art) {
             if (empty($plats_cat)) continue;
         ?>
         <h3><?= $label ?></h3>
-        <table style="width:100%;margin-bottom:16px;">
+        <table class="table-modifier">
             <thead><tr><th>Plat</th><th>Prix</th><th>Quantité</th></tr></thead>
             <tbody>
             <?php foreach ($plats_cat as $plat): ?>
@@ -98,7 +98,7 @@ foreach ($commande['articles'] as $art) {
                     <td><?= htmlspecialchars($plat['nom']) ?></td>
                     <td><?= number_format($plat['prix'], 2) ?> €</td>
                     <td>
-                        <input type="number" name="qte_<?= $plat['id'] ?>"
+                        <input type="number" ... class="input-qte">
                                value="<?= $qtes_actuelles[$plat['id']] ?? 0 ?>"
                                min="0" max="20" style="width:60px;">
                     </td>
@@ -108,7 +108,7 @@ foreach ($commande['articles'] as $art) {
         </table>
         <?php endforeach; ?>
 
-        <div style="display:flex;gap:12px;margin-top:20px;">
+        <div class="form-actions">
             <button type="submit" class="btn-main">💾 Enregistrer les modifications</button>
             <a href="profil.php" class="btn-ok">Annuler</a>
         </div>
