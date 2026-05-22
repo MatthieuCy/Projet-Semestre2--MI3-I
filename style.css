@@ -775,3 +775,7 @@ h2 {
     margin-top: 5px; 
 }
 
+
+.table-modifier { width: 100%; margin-bottom: 16px; }
+.input-qte      { width: 60px; }
+.form-actions   { display: flex; gap: 12px; margin-top: 20px; }
