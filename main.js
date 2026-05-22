@@ -206,7 +206,7 @@ function chargerPlatsAsync(categorie, regime) {
     const container = document.getElementById('grille-plats');
     if (!container) return;
 
-    container.innerHTML = '<p style="text-align:center;padding:40px;">⏳ Chargement...</p>';
+    container.innerHTML = '<p class="texte-vide">⏳ Chargement...</p>';
 
     const params = new URLSearchParams();
     params.set('cat', categorie);
@@ -216,7 +216,7 @@ function chargerPlatsAsync(categorie, regime) {
         .then(r => r.json())
         .then(plats => {
             if (plats.length === 0) {
-                container.innerHTML = '<p style="text-align:center;padding:40px;">Aucun plat pour ces critères.</p>';
+                container.innerHTML = '<p class="texte-vide">Aucun plat pour ces critères.</p>';
                 return;
             }
 
