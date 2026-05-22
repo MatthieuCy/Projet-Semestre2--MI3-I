@@ -779,3 +779,8 @@ h2 {
 .table-modifier { width: 100%; margin-bottom: 16px; }
 .input-qte      { width: 60px; }
 .form-actions   { display: flex; gap: 12px; margin-top: 20px; }
+
+
+.btn-gps            { display: block; text-align: center; margin: 15px 0; }
+.carte-livraison-2  { margin-top: 15px; }
+.form-abandon       { margin-top: 10px; }
