@@ -784,3 +784,6 @@ h2 {
 .btn-gps            { display: block; text-align: center; margin: 15px 0; }
 .carte-livraison-2  { margin-top: 15px; }
 .form-abandon       { margin-top: 10px; }
+
+
+.texte-vide { text-align: center; padding: 40px; }
