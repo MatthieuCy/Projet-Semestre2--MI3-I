@@ -101,7 +101,8 @@ foreach (get_toutes_commandes() as $cmd) {
 
     <!-- id="grille-plats" ciblé par le JS pour mise à jour asynchrone -->
     <?php if (empty($plats_affiches)): ?>
-        <div id="grille-plats"><p style="text-align:center;padding:40px;">Aucun plat pour ces critères.</p></div>
+        <div id="grille-plats"><p class="texte-vide">Aucun plat pour ces critères.</p></div>
+    
     <?php else: ?>
     <div id="grille-plats" class="grid-pizzas">
         <?php foreach ($plats_affiches as $plat): ?>
