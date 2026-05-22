@@ -84,7 +84,7 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
                 <p><strong> Détails :</strong> <?= htmlspecialchars($commande_en_cours['details_livraison'] ?: 'Aucun') ?></p>
             </div>
 
-            <div class="carte-livraison" style="margin-top:15px;">
+            <div class="carte-livraison carte-livraison-2">
                 <h3> Articles</h3>
                 <ul>
                     <?php foreach ($commande_en_cours['articles'] as $art): ?>
@@ -98,7 +98,7 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
             </div>
 
             <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($commande_en_cours['adresse_livraison']) ?>"
-               target="_blank" class="btn-gps" style="display:block; text-align:center; margin:15px 0;">
+               target="_blank" class="btn-gps" >
                  LANCER L'ITINÉRAIRE
             </a>
 
@@ -108,7 +108,7 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
                 <button type="submit" class="btn-valider-livraison"> MARQUER COMME LIVRÉE</button>
             </form>
 
-            <form method="post" action="livraison.php" style="margin-top:10px;">
+           <form method="post" action="livraison.php" class="form-abandon">
                 <input type="hidden" name="commande_id" value="<?= $commande_en_cours['id'] ?>">
                 <input type="hidden" name="action" value="abandonnee">
                 <button type="submit" class="btn-valider-livraison btn-danger-livraison">ADRESSE INTROUVABLE</button>
