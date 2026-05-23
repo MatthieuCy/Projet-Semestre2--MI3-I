@@ -100,7 +100,7 @@ foreach ($commande['articles'] as $art) {
                     <td>
                         <input type="number" ... class="input-qte">
                                value="<?= $qtes_actuelles[$plat['id']] ?? 0 ?>"
-                               min="0" max="20" style="width:60px;">
+                               min="0" max="20">
                     </td>
                 </tr>
             <?php endforeach; ?>
