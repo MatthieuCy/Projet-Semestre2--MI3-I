@@ -41,7 +41,7 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant_formatte . "#" . $
             <input type="hidden" name="vendeur"     value="<?= $vendeur ?>">
             <input type="hidden" name="retour"      value="<?= htmlspecialchars($url_retour) ?>">
             <input type="hidden" name="control"     value="<?= $control ?>">
-            <button type="submit" class="btn-main">💳 Payer la différence</button>
+            <button type="submit" class="btn-main">Payer la différence</button>
         </form>
         <a href="profil.php" class="btn-ok btn-annuler">Annuler</a>
     </div>
