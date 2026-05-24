@@ -787,3 +787,6 @@ h2 {
 
 
 .texte-vide { text-align: center; padding: 40px; }
+
+.total-live-box { margin: 20px 0; padding: 14px; background: var(--creme-fonce); border-radius: 10px; font-size: 1.1em; }
+.btn-annuler    { display: block; margin-top: 12px; }
