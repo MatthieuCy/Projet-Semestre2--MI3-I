@@ -44,11 +44,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($articles_mis_a_jour)) {
         $erreur = 'Votre commande ne peut pas être vide.';
     } else {
+        $ancien_total = $commande['total'];
         $commande['articles'] = $articles_mis_a_jour;
         $commande['total']    = round($total, 2);
         if (sauvegarder_commande($commande)) {
+            $difference = round($total - $ancien_total, 2);
+            if ($difference > 0) {
+                $_SESSION['paiement_complement'] = [
+                    'commande_id' => $commande_id,
+                    'montant'     => $difference,
+                ];
+                header('Location: paiement_complement.php?id=' . $commande_id);
+                exit;
+            }
             $succes = 'Commande modifiée avec succès !';
-            $commande = get_commande_par_id($commande_id); // Recharger
+            $commande = get_commande_par_id($commande_id);
         } else {
             $erreur = 'Une erreur est survenue lors de la sauvegarde.';
         }
@@ -98,7 +108,7 @@ foreach ($commande['articles'] as $art) {
                     <td><?= htmlspecialchars($plat['nom']) ?></td>
                     <td><?= number_format($plat['prix'], 2) ?> €</td>
                     <td>
-                        <input type="number" ... class="input-qte">
+                        <input type="number" name="qte_<?= $plat['id'] ?>" class="input-qte"
                                value="<?= $qtes_actuelles[$plat['id']] ?? 0 ?>"
                                min="0" max="20">
                     </td>
@@ -107,6 +117,10 @@ foreach ($commande['articles'] as $art) {
             </tbody>
         </table>
         <?php endforeach; ?>
+
+        <div class="total-live-box">
+            <strong>Total estimé : <span id="total-live">0,00</span> €</strong>
+        </div>
 
         <div class="form-actions">
             <button type="submit" class="btn-main">💾 Enregistrer les modifications</button>
@@ -117,5 +131,28 @@ foreach ($commande['articles'] as $art) {
 <footer>
     <p>&copy; 2025-2026 Projet Pizza Nova -préING2- Ibrahim, Ikram &amp; Matthieu</p>
 </footer>
+<script>
+const prixPlats = {
+    <?php foreach ($tous_plats as $plat): ?>
+    <?= $plat['id'] ?>: <?= $plat['prix'] ?>,
+    <?php endforeach; ?>
+};
+function recalculerTotal() {
+    let total = 0;
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        const match = input.name.match(/^qte_(\d+)$/);
+        if (match) {
+            const id  = parseInt(match[1]);
+            const qte = parseInt(input.value) || 0;
+            if (prixPlats[id] && qte > 0) total += prixPlats[id] * qte;
+        }
+    });
+    document.getElementById('total-live').textContent = total.toFixed(2).replace('.', ',');
+}
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="number"]').forEach(i => i.addEventListener('input', recalculerTotal));
+    recalculerTotal();
+});
+</script>
 </body>
 </html>
