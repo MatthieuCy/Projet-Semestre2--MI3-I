@@ -106,7 +106,7 @@ $id_nouvelle_commande = null;
     require_once(__DIR__ . '/includes/nav.php'); 
 ?>
 <main class="container">
-    <h1>Mon Panier 🛒</h1>
+    <h1>Mon Panier</h1>
 
     <?php if ($message != "") { ?>
         <p class="message-succes"><?php echo $message; ?></p>
@@ -148,7 +148,7 @@ $id_nouvelle_commande = null;
                 </td>
                 <td><?php echo number_format($item['prix'] * $item['quantite'], 2); ?> €</td>
                 <td>
-                    <a href="panier.php?action=retirer&cle=<?php echo urlencode($cle); ?>" class="btn-ok">✕</a>
+                    <a href="panier.php?action=retirer&cle=<?php echo urlencode($cle); ?>" class="btn-ok">Retirer</a>
                 </td>
             </tr>
         <?php } ?>
