@@ -94,7 +94,7 @@ foreach ($commande['articles'] as $art) {
 
     <form method="post" action="modifier_commande.php?id=<?= $commande['id'] ?>">
         <?php
-        $categories = ['pizza' => '🍕 Pizzas', 'entree' => '🥗 Entrées', 'dessert' => '🍮 Desserts', 'boisson' => '🥤 Boissons'];
+        $categories = ['pizza' => 'Pizzas', 'entree' => 'Entrées', 'dessert' => 'Desserts', 'boisson' => 'Boissons'];
         foreach ($categories as $cat => $label):
             $plats_cat = array_filter($tous_plats, fn($p) => $p['categorie'] === $cat);
             if (empty($plats_cat)) continue;
@@ -123,7 +123,7 @@ foreach ($commande['articles'] as $art) {
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn-main">💾 Enregistrer les modifications</button>
+            <button type="submit" class="btn-main">Enregistrer les modifications</button>
             <a href="profil.php" class="btn-ok">Annuler</a>
         </div>
     </form>
