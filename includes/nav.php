@@ -28,7 +28,7 @@ $role = $u ? $u['role'] : null;
                     <li><a href="livraison.php">Livreur</a></li>
                 <?php endif; ?>
                 <?php if ($role === 'client'): ?>
-                    <li><a href="panier.php">🛒 Panier
+                    <li><a href="panier.php">Panier
                         <?php
                         $panier = $_SESSION['panier'] ?? [];
                         $nb = array_sum(array_column($panier, 'quantite'));
