@@ -69,10 +69,10 @@ $points = $u['points_fidelite'] ?? 0;
                 <strong><?= $info['label'] ?> :</strong>
                 <span class="valeur-champ"><?= htmlspecialchars($info['val']) ?></span>
             </div>
-            <span class="edit-icon" data-champ="<?= $cle ?>" title="Modifier">✎</span>
+            <span class="edit-icon" data-champ="<?= $cle ?>" title="Modifier">[modifier]</span>
         </div>
         <?php endforeach; ?>
-        <p class="note-phase">Cliquez sur ✎ pour modifier (sauvegarde automatique)</p>
+        <p class="note-phase">Cliquez sur [modifier] pour modifier (sauvegarde automatique)</p>
        </aside>
 
         <!-- Points fidélité -->
@@ -133,7 +133,7 @@ $points = $u['points_fidelite'] ?? 0;
                             <?php elseif ($note !== null): ?>
                                  <?= $note ?>/5
                             <?php elseif ($cmd['statut'] === 'en_attente'): ?>
-                                <a href="modifier_commande.php?id=<?= $cmd['id'] ?>" class="btn-ok">✏️ Modifier</a>
+                                <a href="modifier_commande.php?id=<?= $cmd['id'] ?>" class="btn-ok">Modifier</a>
                             <?php else: ?>
                                 —
                             <?php endif; ?>
@@ -147,7 +147,7 @@ $points = $u['points_fidelite'] ?? 0;
 
     </div>
 
-        <a href="carte.php" class="btn-main">🍕 Commander maintenant</a>
+        <a href="carte.php" class="btn-main">Commander maintenant</a>
 </main>
 
 <footer>
