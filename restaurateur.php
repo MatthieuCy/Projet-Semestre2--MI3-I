@@ -192,7 +192,7 @@ function changerStatut(commandeId, action, bouton, selectId = null) {
     }
 
     bouton.disabled    = true;
-    bouton.textContent = '⏳';
+    bouton.textContent = '...';
 
     fetch('api_restaurateur.php', {
         method:  'POST',
@@ -202,16 +202,16 @@ function changerStatut(commandeId, action, bouton, selectId = null) {
     .then(r => r.json())
     .then(data => {
         if (data.succes) {
-            afficherNotification('✅ ' + data.message, 'succes');
+            afficherNotification('OK - ' + data.message, 'succes');
             setTimeout(() => location.reload(), 1500);
         } else {
-            afficherNotification('❌ ' + data.message, 'erreur');
+            afficherNotification('Erreur - ' + data.message, 'erreur');
             bouton.disabled    = false;
-            bouton.textContent = action === 'lancer' ? '🍳 Lancer la préparation' : '✅ Prêt !';
+            bouton.textContent = action === 'lancer' ? 'Lancer la preparation' : 'Pret !';
         }
     })
     .catch(() => {
-        afficherNotification('❌ Erreur réseau.', 'erreur');
+        afficherNotification('Erreur réseau.', 'erreur');
         bouton.disabled    = false;
     });
 }
