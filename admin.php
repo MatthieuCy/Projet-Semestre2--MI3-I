@@ -157,7 +157,7 @@ $nb_commandes = count(get_toutes_commandes());
                         <form method="post" action="admin.php" style="display:inline;" onsubmit="return confirm('Supprimer ce compte ?')">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="hidden" name="action" value="supprimer">
-                            <button type="submit" class="btn-ok btn-danger" style="background:#c0392b;">✕</button>
+                            <button type="submit" class="btn-ok btn-danger" style="background:#c0392b;">Supprimer</button>
                         </form>
                     <?php endif; ?>
                 </td>
