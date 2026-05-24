@@ -51,7 +51,7 @@ $_SESSION['temp_commande'] = [
                 <input type="hidden" name="vendeur" value="<?php echo $vendeur; ?>">
                 <input type="hidden" name="retour" value="<?php echo $url_retour; ?>">
                 <input type="hidden" name="control" value="<?php echo $control; ?>">
-                <button type="submit" class="btn-main">Payer maintenant 💳</button>
+                <button type="submit" class="btn-main">Payer maintenant</button>
             </form>
         </div>
     </main>
