@@ -80,7 +80,7 @@ foreach (get_toutes_commandes() as $cmd) {
                    class="filter-btn <?= $filtre_reg === 'halal' ? 'active' : '' ?>"
                    data-regime="halal">Halal</a>
                 <?php if ($filtre_reg): ?>
-                    <a href="carte.php?cat=<?= $categorie ?>" class="filter-btn">✕ Effacer</a>
+                    <a href="carte.php?cat=<?= $categorie ?>" class="filter-btn">Effacer</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -119,7 +119,7 @@ foreach (get_toutes_commandes() as $cmd) {
                 <?php endif; ?>
                 <span class="price"><?= number_format($plat['prix'], 2) ?> €</span>
                 <?php if (get_role_connecte() === 'client' || !est_connecte()): ?>
-                    <a href="panier.php?action=ajouter&type=plat&id=<?= $plat['id'] ?>" class="btn-add">Ajouter au panier 🛒</a>
+                    <a href="panier.php?action=ajouter&type=plat&id=<?= $plat['id'] ?>" class="btn-add">Ajouter au panier</a>
                 <?php endif; ?>
             </div>
         </article>
@@ -146,7 +146,7 @@ foreach (get_toutes_commandes() as $cmd) {
                         return null;
                     }, $menu['plats_ids'] ?? []));
                     if (!empty($noms_plats)): ?>
-                        <p class="allergenes">🍽️ <?= htmlspecialchars(implode(', ', $noms_plats)) ?></p>
+                        <p class="allergenes"><?= htmlspecialchars(implode(', ', $noms_plats)) ?></p>
                     <?php endif; ?>
                     <?php if ($menu['creneaux'] === 'midi'): ?>
                         <p class="allergenes"> Disponible midi uniquement</p>
