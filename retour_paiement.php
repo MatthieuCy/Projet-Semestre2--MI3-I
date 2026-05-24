@@ -20,61 +20,63 @@ $message         = "Le paiement a été refusé ou annulé.";
 $paiement_valide = false;
 
 if ($statut === 'accepted' && $control_recu === $control_verif) {
-    // On crée la commande dans le JSON 
-    $temp = $_SESSION['temp_commande'];
-    $type_choisi = $temp['type_commande'];
 
-    // Définir l'affichage de l'adresse selon le choix du client 
-    if ($type_choisi === 'livraison') {
-        $adresse_finale = $u['adresse'] ?? 'Adresse non renseignée';
-    } elseif ($type_choisi === 'emporter') {
-        $adresse_finale = 'À emporter';
+    // CAS : paiement complémentaire suite à une modification de commande
+    if (isset($_GET['complement']) && isset($_GET['id'])) {
+        $commande_id_complement = (int)$_GET['id'];
+        unset($_SESSION['paiement_complement']);
+        $paiement_valide = true;
+        $message = "Paiement complémentaire confirmé ! Commande #{$commande_id_complement} mise à jour.";
+
     } else {
-        $adresse_finale = 'Sur place';
-    }
+        // CAS NORMAL : nouvelle commande depuis le panier
+        $temp        = $_SESSION['temp_commande'];
+        $type_choisi = $temp['type_commande'];
 
-    $articles = [];
-    foreach ($_SESSION['panier'] as $item) {
-        $articles[] = [
-            'type' => $item['type'],
-            'id' => $item['id'],
-            'quantite' => $item['quantite'],
-            'nom' => $item['nom'],
-            'prix_unitaire' => $item['prix']
+        if ($type_choisi === 'livraison') {
+            $adresse_finale = $u['adresse'] ?? 'Adresse non renseignée';
+        } elseif ($type_choisi === 'emporter') {
+            $adresse_finale = 'À emporter';
+        } else {
+            $adresse_finale = 'Sur place';
+        }
+
+        $articles = [];
+        foreach ($_SESSION['panier'] as $item) {
+            $articles[] = [
+                'type'          => $item['type'],
+                'id'            => $item['id'],
+                'quantite'      => $item['quantite'],
+                'nom'           => $item['nom'],
+                'prix_unitaire' => $item['prix']
+            ];
+        }
+
+        $nouvelle_commande = [
+            'client_id'                => $u['id'],
+            'articles'                 => $articles,
+            'total'                    => (float)$montant,
+            'adresse_livraison'        => $adresse_finale,
+            'type'                     => $type_choisi,
+            'statut'                   => 'en_attente',
+            'date_commande'            => date('Y-m-d H:i:s'),
+            'date_livraison_souhaitee' => $temp['date_souhaitee'] ?? null,
+            'paiement_statut'          => 'paye',
+            'livreur_id'               => null,
+            'telephone_client'         => $u['telephone'] ?? '',
+            'details_livraison'        => $u['details'] ?? '',
+            'note_produits'            => null,
+            'note_livraison'           => null,
+            'commentaire'              => '',
         ];
+
+        $commande_id             = ajouter_commande($nouvelle_commande);
+        $_SESSION['panier']        = [];
+        $_SESSION['temp_commande'] = [];
+        $paiement_valide = true;
+        $message         = "Commande #{$commande_id} enregistrée avec succès !";
     }
-
-    $nouvelle_commande = [
-    'client_id'                => $u['id'],
-    'articles'                 => $articles,
-    'total'                    => (float)$montant,
-    'adresse_livraison'        => $adresse_finale,
-    'type'                     => $type_choisi,
-    'statut'                   => 'en_attente',
-    'date_commande'            => date('Y-m-d H:i:s'),
-    'date_livraison_souhaitee' => $temp['date_souhaitee'] ?? null, // Sécurisé au cas où la date est absente
-    'paiement_statut'          => 'paye',
-    'livreur_id'               => null,
-    'telephone_client'         => $u['telephone'] ?? '',
-    'details_livraison'        => $u['details'] ?? '',
-    'note_produits'            => null,
-    'note_livraison'           => null,
-    'commentaire'              => '',
-];
-   
-
-
-   
-   
-    
-    
-
-    $commande_id     = ajouter_commande($nouvelle_commande);
-    $_SESSION['panier']        = [];
-    $_SESSION['temp_commande'] = [];
-    $paiement_valide = true;
-    $message         = "Commande #{$commande_id} enregistrée avec succès !";
-    }
+}
 ?>
 
 <!DOCTYPE html>
