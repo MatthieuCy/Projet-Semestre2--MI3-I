@@ -64,7 +64,7 @@ $client = $commande_en_cours ? get_utilisateur_par_id($commande_en_cours['client
     <?php endif; ?>
 
     <?php if (!$commande_en_cours): ?>
-        <section class="entete-livraison" style="margin-top:20px;">
+        <section class="entete-livraison">
             <p>Aucune livraison assignée pour le moment.</p>
             <p>En attente d'une nouvelle course... </p>
         </section>

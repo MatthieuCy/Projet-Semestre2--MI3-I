@@ -800,3 +800,20 @@ h2 {
 .modale-prix               { font-weight: bold; font-size: 1.2em; margin-bottom: 20px; }
 .modale-actions            { display: flex; gap: 12px; justify-content: center; }
 .search-form               { display: flex; gap: 8px; }
+
+/* Admin */
+.form-inline        { margin: 0; }
+.form-inline-block  { display: inline; }
+.input-remise       { width: 60px; padding: 5px; }
+.btn-bloquer        { background: #c0392b; }
+.btn-debloquer      { background: #27ae60; }
+
+/* Panier */
+.td-quantite        { white-space: nowrap; }
+.btn-quantite       { padding: 2px 8px; }
+
+/* Livraison */
+.entete-livraison   { margin-top: 20px; }
+
+/* Admin profil */
+.btn-retour         { margin-bottom: 20px; display: inline-block; }

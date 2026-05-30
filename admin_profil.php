@@ -29,7 +29,7 @@ $statut_labels = [
 require_once __DIR__ . '/includes/nav.php'; ?>
 <main class="profile-container">
     <h1>Profil de <?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></h1>
-    <a href="admin.php" class="btn-ok" style="margin-bottom:20px; display:inline-block;">← Retour</a>
+    <a href="admin.php" class="btn-ok btn-retour">← Retour</a>
 
     <div class="profile-grid">
         <aside class="profile-card">
