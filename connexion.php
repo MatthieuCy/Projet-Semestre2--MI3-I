@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
+require_once(__DIR__ . '/includes/logs.php');
 
 // Si déjà connecté, rediriger
 if (est_connecte()) {
@@ -44,6 +45,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             $erreur = 'Email ou mot de passe incorrect.';
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login = trim($_POST['email'] ?? '');
+    $mdp   = trim($_POST['mdp'] ?? '');
+
+    if (empty($login) || empty($mdp)) {
+        $erreur = 'Veuillez remplir tous les champs.';
+    } else {
+        $utilisateur = get_utilisateur_par_login($login);
+
+        if ($utilisateur && password_verify($mdp, $utilisateur['mot_de_passe'])) {
+            if ($utilisateur['statut'] === 'bloque') {
+                $erreur = 'Ce compte est désactivé. Contactez l\'administrateur.';
+                // ← AJOUTER
+                enregistrer_log('compte_bloque', $login, 'Tentative de connexion sur un compte bloqué.');
+            } else {
+                $utilisateur['derniere_connexion'] = date('Y-m-d H:i:s');
+                sauvegarder_utilisateur($utilisateur);
+                connecter_utilisateur($utilisateur);
+                switch ($utilisateur['role']) {
+                    case 'admin':        header('Location: admin.php');       break;
+                    case 'restaurateur': header('Location: restaurateur.php'); break;
+                    case 'livreur':      header('Location: livraison.php');    break;
+                    default:             header('Location: profil.php');       break;
+                }
+                exit;
+            }
+        } else {
+            $erreur = 'Email ou mot de passe incorrect.';
+            
+            enregistrer_log('mauvais_mdp', $login, 'Mot de passe incorrect.');
+        }
+    }
+
         }
     }
 }
