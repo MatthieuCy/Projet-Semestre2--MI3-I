@@ -2,7 +2,6 @@
 // api_admin.php — Actions admin en asynchrone (bloquer/débloquer)
 require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
-require_once(__DIR__ . '/includes/logs.php');
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -33,15 +32,19 @@ if ($cible['id'] === $connecte['id']) {
 if ($action === 'bloquer') {
     $cible['statut'] = 'bloque';
     sauvegarder_utilisateur($cible);
-    enregistrer_log('blocage_compte', $cible['login'], "Compte bloqué par l'admin (id: {$admin['id']}).");
-    echo json_encode(['succes' => true, 'message' => 'Compte bloqué.', 'nouveau_statut' => 'bloque']);
-    
+    echo json_encode([
+        'succes'   => true,
+        'message'  => "{$cible['prenom']} {$cible['nom']} a été bloqué.",
+        'nouveau_statut' => 'bloque'
+    ]);
 } elseif ($action === 'activer') {
     $cible['statut'] = 'actif';
     sauvegarder_utilisateur($cible);
-     enregistrer_log('deblocage_compte', $cible['login'], "Compte débloqué par l'admin (id: {$admin['id']}).");
-    echo json_encode(['succes' => true, 'message' => 'Compte activé.', 'nouveau_statut' => 'actif']);
-  
+    echo json_encode([
+        'succes'   => true,
+        'message'  => "{$cible['prenom']} {$cible['nom']} a été débloqué.",
+        'nouveau_statut' => 'actif'
+    ]);
 } else {
     echo json_encode(['succes' => false, 'message' => 'Action inconnue.']);
 }
