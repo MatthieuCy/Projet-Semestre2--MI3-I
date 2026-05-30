@@ -141,10 +141,10 @@ $id_nouvelle_commande = null;
                 <td><?php echo htmlspecialchars($item['nom']); ?> <small>(<?php echo $item['type']; ?>)</small></td>
                 <td><?php echo number_format($item['prix'], 2); ?> €</td>
                 // Gestion de la diminution de la quantité d'un article dans le panier
-                <td style="white-space:nowrap;">
-                   <a href="panier.php?action=diminuer&cle=<?php echo urlencode($cle); ?>" class="btn-ok" style="padding:2px 8px;">−</a>
+                <td class="td-quantite">
+                   <a href="panier.php?action=diminuer&cle=<?php echo urlencode($cle); ?>" class="btn-ok btn-quantite">−</a>
                       <?php echo $item['quantite']; ?>
-                    <a href="panier.php?action=ajouter&type=<?php echo $item['type']; ?>&id=<?php echo $item['id']; ?>" class="btn-ok" style="padding:2px 8px;">+</a>
+                    <a href="panier.php?action=ajouter&type=<?php echo $item['type']; ?>&id=<?php echo $item['id']; ?>" class="btn-ok btn-quantite">+</a>
                 </td>
                 <td><?php echo number_format($item['prix'] * $item['quantite'], 2); ?> €</td>
                 <td>
