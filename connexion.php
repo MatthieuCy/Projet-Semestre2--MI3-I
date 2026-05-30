@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
-require_once(__DIR__ . '/includes/logs.php');
+;
 
 // Si déjà connecté, rediriger
 if (est_connecte()) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($utilisateur && password_verify($mdp, $utilisateur['mot_de_passe'])) {
             if ($utilisateur['statut'] === 'bloque') {
                 $erreur = 'Ce compte est désactivé. Contactez l\'administrateur.';
-                enregistrer_log('compte_bloque', $login, 'Tentative de connexion sur un compte bloqué.');
+               
             } else {
                 $utilisateur['derniere_connexion'] = date('Y-m-d H:i:s');
                 sauvegarder_utilisateur($utilisateur);
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             $erreur = 'Email ou mot de passe incorrect.';
-            enregistrer_log('mauvais_mdp', $login, 'Mot de passe incorrect.');
+        
         }
     }
 }
