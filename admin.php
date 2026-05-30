@@ -117,7 +117,7 @@ $nb_commandes = count(get_toutes_commandes());
                 <td><?= htmlspecialchars($u['login']) ?></td>
                 <td><span class="badge-role badge-role-<?= $u['role'] ?>"><?= ucfirst($u['role']) ?></span></td>
                 <td>
-                    <form method="post" action="admin.php" style="margin:0;">
+                    <form method="post" action="admin.php" class="form-inline">
                         <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                         <input type="hidden" name="action" value="changer_statut">
                         <select name="nouveau_statut" onchange="this.form.submit()" class="select-statut select-statut-<?= $u['statut'] ?>">
@@ -131,7 +131,7 @@ $nb_commandes = count(get_toutes_commandes());
                     <form method="post" action="admin.php" class="form-inline">
                         <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                         <input type="hidden" name="action" value="changer_remise">
-                        <input type="number" name="remise" value="<?= $u['remise'] ?? 0 ?>" min="0" max="50" class="input-remise" style="width:60px;padding:5px;">
+                        <input type="number" name="remise" value="<?= $u['remise'] ?? 0 ?>" min="0" max="50" class="input-remise">
                         <button type="submit" class="btn-ok">%</button>
                     </form>
                 </td>
@@ -177,24 +177,22 @@ $nb_commandes = count(get_toutes_commandes());
 
     <!-- Boutons bloquer/débloquer ASYNCHRONES  -->
                     <?php if ($u['statut'] !== 'bloque'): ?>
-                        <button class="btn-ok btn-danger"
-                                onclick="actionUtilisateur(<?= $u['id'] ?>, 'bloquer', this)"
-                                style="background:#c0392b;">
+                        <button class="btn-ok btn-danger btn-bloquer"
+                                onclick="actionUtilisateur(<?= $u['id'] ?>, 'bloquer', this)">
                             Bloquer
                         </button>
                     <?php else: ?>
-                        <button class="btn-ok btn-success"
-                                onclick="actionUtilisateur(<?= $u['id'] ?>, 'activer', this)"
-                                style="background:#27ae60;">
+                        <button class="btn-ok btn-success btn-debloquer"
+                                onclick="actionUtilisateur(<?= $u['id'] ?>, 'activer', this)">
                             Débloquer
                         </button>
                     <?php endif; ?>
 
                     <?php $moi = get_utilisateur_connecte(); if ($u['id'] !== $moi['id']): ?>
-                        <form method="post" action="admin.php" style="display:inline;" onsubmit="return confirm('Supprimer ce compte ?')">
+                        <form method="post" action="admin.php" class="form-inline-block" onsubmit="return confirm('Supprimer ce compte ?')">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="hidden" name="action" value="supprimer">
-                            <button type="submit" class="btn-ok btn-danger" style="background:#c0392b;">Supprimer</button>
+                            <button type="submit" class="btn-ok btn-danger btn-bloquer">Supprimer</button>
                         </form>
                     <?php endif; ?>
                 </td>
