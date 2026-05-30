@@ -38,7 +38,7 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
             <h2>Une expérience artisanale unique.</h2>
             <div class="search-box">
                 <label for="rech">Rechercher :</label>
-                <form action="carte.php" method="get" style="display:flex;gap:8px;">
+                <form action="carte.php" method="get" class="search-form">
                     <input type="text" id="rech" name="recherche" class="search-input"
                            placeholder="Ex: Margherita...">
                     <button type="submit" class="btn-ok">Ok</button>
@@ -90,21 +90,19 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
     </div>
 </section>
 
-<section class="featured container-mobile">
+<section class="featured container-mobile section-surprise">
     <h2>Vous ne savez pas quoi choisir ?</h2>
-    <p style="text-align:center;margin-bottom:16px;">Laissez-nous décider pour vous !</p>
-    <div style="text-align:center;">
-        <button id="btn-surprise" class="btn-main">Menu surprise</button>
-    </div>
+    <p>Laissez-nous décider pour vous !</p>
+    <button id="btn-surprise" class="btn-main">Menu surprise</button>
 </section>
 
 <!-- Modale menu aléatoire -->
-<div id="modale-surprise" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center;">
-    <div style="background:var(--creme);border-radius:12px;padding:32px;max-width:400px;width:90%;text-align:center;">
+<div id="modale-surprise" class="modale-overlay">
+    <div class="modale-contenu">
         <h3 id="surprise-nom"></h3>
-        <p id="surprise-desc" style="margin:12px 0;"></p>
-        <p id="surprise-prix" style="font-weight:bold;font-size:1.2em;margin-bottom:20px;"></p>
-        <div style="display:flex;gap:12px;justify-content:center;">
+        <p id="surprise-desc" class="modale-desc"></p>
+        <p id="surprise-prix" class="modale-prix"></p>
+        <div class="modale-actions">
             <a id="surprise-lien" href="#" class="btn-main">Ajouter au panier</a>
             <button onclick="fermerSurprise()" class="btn-ok">Fermer</button>
         </div>
