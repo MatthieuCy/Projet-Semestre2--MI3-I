@@ -2,9 +2,20 @@
 require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
 
-// Plats mis en avant sur la page d'accueil
-$plats_phares_ids = [1, 4, 5]; // Margherita, Calzone, Veggie
-$plats_phares = array_filter(get_tous_plats(), fn($p) => in_array($p['id'], $plats_phares_ids));
+// Calculer les 3 plats les plus commandés dynamiquement
+$comptage = [];
+foreach (get_toutes_commandes() as $cmd) {
+    foreach ($cmd['articles'] ?? [] as $art) {
+        if ($art['type'] === 'plat') {
+            $comptage[$art['id']] = ($comptage[$art['id']] ?? 0) + ($art['quantite'] ?? 1);
+        }
+    }
+}
+arsort($comptage);
+$top_ids = array_slice(array_keys($comptage), 0, 3);
+$tous_plats = get_tous_plats();
+$plats_phares = array_filter($tous_plats, fn($p) => in_array($p['id'], $top_ids));
+$menus = get_tous_menus();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,9 +69,9 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
     </div>
 </section>
 
-<!-- Plats du moment -->
+<!-- Plats les plus commandés -->
 <section class="featured container-mobile">
-    <h2> Nos incontournables</h2>
+    <h2>Les plus commandés</h2>
     <div class="grid-pizzas">
         <?php foreach ($plats_phares as $plat): ?>
         <article class="pizza-card">
