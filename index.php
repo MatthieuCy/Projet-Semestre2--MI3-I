@@ -90,7 +90,44 @@ require_once(__DIR__ . '/includes/nav.php'); ?>
     </div>
 </section>
 
-<section class="info-section container-mobile">
+<section class="featured container-mobile">
+    <h2>Vous ne savez pas quoi choisir ?</h2>
+    <p style="text-align:center;margin-bottom:16px;">Laissez-nous décider pour vous !</p>
+    <div style="text-align:center;">
+        <button id="btn-surprise" class="btn-main">Menu surprise</button>
+    </div>
+</section>
+
+<!-- Modale menu aléatoire -->
+<div id="modale-surprise" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center;">
+    <div style="background:var(--creme);border-radius:12px;padding:32px;max-width:400px;width:90%;text-align:center;">
+        <h3 id="surprise-nom"></h3>
+        <p id="surprise-desc" style="margin:12px 0;"></p>
+        <p id="surprise-prix" style="font-weight:bold;font-size:1.2em;margin-bottom:20px;"></p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+            <a id="surprise-lien" href="#" class="btn-main">Ajouter au panier</a>
+            <button onclick="fermerSurprise()" class="btn-ok">Fermer</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const menus = <?= json_encode(array_values($menus), JSON_UNESCAPED_UNICODE) ?>;
+
+document.getElementById('btn-surprise').addEventListener('click', function() {
+    const menu = menus[Math.floor(Math.random() * menus.length)];
+    document.getElementById('surprise-nom').textContent  = menu.nom;
+    document.getElementById('surprise-desc').textContent = menu.description;
+    document.getElementById('surprise-prix').textContent = parseFloat(menu.prix_total).toFixed(2) + ' €';
+    document.getElementById('surprise-lien').href        = 'panier.php?action=ajouter&type=menu&id=' + menu.id;
+    const modale = document.getElementById('modale-surprise');
+    modale.style.display = 'flex';
+});
+
+function fermerSurprise() {
+    document.getElementById('modale-surprise').style.display = 'none';
+}
+</script>
     <div class="carte-livraison">
         <h3> Nos Horaires</h3>
         <p>Lundi – Dimanche : 11h30–14h30 / 18h30–23h00</p>
