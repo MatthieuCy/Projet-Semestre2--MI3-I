@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__ . '/includes/session.php');
 require_once(__DIR__ . '/includes/donnees.php');
+require_once(__DIR__ . '/includes/logs.php');
+$logs = lire_logs();
 exiger_role('admin');
 
 $message = '';
@@ -137,6 +139,41 @@ $nb_commandes = count(get_toutes_commandes());
                 <td><?= htmlspecialchars($u['date_inscription']) ?></td>
                 <td class="td-actions">
                     <a href="admin_profil.php?id=<?= $u['id'] ?>" class="btn-ok">Voir</a>
+
+
+                     <!-- Tableau Logs -->
+<div class="admin-filters"><h2>Logs d'incidents</h2></div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Login</th>
+                <th>IP</th>
+                <th>Détails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (empty($logs)): ?>
+                <tr><td colspan="5"><em>Aucun incident enregistré.</em></td></tr>
+            <?php else: ?>
+                <?php foreach ($logs as $log): ?>
+                <tr>
+                    <td><?= htmlspecialchars($log['date']) ?></td>
+                    <td><span class="badge-role"><?= htmlspecialchars($log['type']) ?></span></td>
+                    <td><?= htmlspecialchars($log['login']) ?></td>
+                    <td><?= htmlspecialchars($log['ip']) ?></td>
+                    <td><em><?= htmlspecialchars($log['details']) ?></em></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+
+                    
 
     <!-- Boutons bloquer/débloquer ASYNCHRONES  -->
                     <?php if ($u['statut'] !== 'bloque'): ?>
