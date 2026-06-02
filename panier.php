@@ -140,7 +140,7 @@ $id_nouvelle_commande = null;
             <tr>
                 <td><?php echo htmlspecialchars($item['nom']); ?> <small>(<?php echo $item['type']; ?>)</small></td>
                 <td><?php echo number_format($item['prix'], 2); ?> €</td>
-                // Gestion de la diminution de la quantité d'un article dans le panier
+                <!-- Gestion de la diminution de la quantité d'un article dans le panier -->
                 <td class="td-quantite">
                    <a href="panier.php?action=diminuer&cle=<?php echo urlencode($cle); ?>" class="btn-ok btn-quantite">−</a>
                       <?php echo $item['quantite']; ?>
