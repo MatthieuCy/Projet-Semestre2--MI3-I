@@ -139,18 +139,28 @@ const prixPlats = {
 };
 function recalculerTotal() {
     let total = 0;
+    // Parcourt tous les champs de type number (quantités)
     document.querySelectorAll('input[type="number"]').forEach(input => {
+        // Récupère l'id du plat depuis le nom (ex: qte_1 → 1)
         const match = input.name.match(/^qte_(\d+)$/);
         if (match) {
-            const id  = parseInt(match[1]);
+            // Conversion de l'id en nombre  puis récupère  quantité
+            const id = parseInt(match[1]);
             const qte = parseInt(input.value) || 0;
-            if (prixPlats[id] && qte > 0) total += prixPlats[id] * qte;
+            if (prixPlats[id] && qte > 0) {
+                total += prixPlats[id] * qte;
+            }
         }
     });
+    // Affiche le total avec 2 décimales et format français
     document.getElementById('total-live').textContent = total.toFixed(2).replace('.', ',');
 }
+// Quand la page est totalement chargée
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('input[type="number"]').forEach(i => i.addEventListener('input', recalculerTotal));
+    // recalcul automatique à chaque changement
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('input', recalculerTotal);
+    });
     recalculerTotal();
 });
 </script>
