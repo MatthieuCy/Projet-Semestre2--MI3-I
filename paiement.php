@@ -24,7 +24,7 @@ $montant_formatte = number_format($total_remise, 2, '.', '');
 $vendeur = "MI-3_I"; 
 $transaction = substr(md5(uniqid(mt_rand(), true)), 0, 15); // Id unique
 $protocole  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$url_retour = $protocole . '://' . $_SERVER['HTTP_HOST'] . '/retour_paiement.php';
+$url_retour = $protocole . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/retour_paiement.php';
 
 // Calcul de la valeur de contrôle (Hash MD5) 
 $api_key = getAPIKey($vendeur); 

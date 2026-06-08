@@ -18,7 +18,7 @@ $commande_id      = $complement['commande_id'];
 $vendeur     = "MI-3_I";
 $transaction = substr(md5(uniqid(mt_rand(), true)), 0, 15);
 $protocole   = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$url_retour  = $protocole . '://' . $_SERVER['HTTP_HOST'] . '/retour_paiement.php?complement=1&id=' . $commande_id;
+$url_retour  = $protocole . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/retour_paiement.php?complement=1&id=' . $commande_id;
 
 $api_key = getAPIKey($vendeur);
 $control = md5($api_key . "#" . $transaction . "#" . $montant_formatte . "#" . $vendeur . "#" . $url_retour . "#");
